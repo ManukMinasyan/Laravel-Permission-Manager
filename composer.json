@@ -1,0 +1,12 @@
+{
+    "name": "manukminasyan/laravel-permission-manager",
+    "description": "Create and manage your all permissions and routes",
+    "authors": [
+        {
+            "name": "Manuk",
+            "email": "manuk.minasyan1@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
