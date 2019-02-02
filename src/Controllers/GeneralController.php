@@ -9,11 +9,19 @@
 namespace ManukMinasyan\LaravelPermissionManager;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Route;
 
 class GeneralController extends Controller
 {
     public function index()
     {
         return view('laravel-permission-manager::index');
+    }
+
+    public function routes()
+    {
+        $routes = Route::getRoutes()->getRoutes();
+
+        return view();
     }
 }

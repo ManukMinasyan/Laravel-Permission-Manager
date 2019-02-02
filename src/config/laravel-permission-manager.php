@@ -7,7 +7,14 @@
  */
 
 return [
+    'database' => [
+        'model_table' => 'permission_manager_models'
+    ],
+
+
     'middleware' => [
-          'auth',
-    ]
+//          'auth',
+    ],
+
+    'route' => 'permission-manager'
 ];

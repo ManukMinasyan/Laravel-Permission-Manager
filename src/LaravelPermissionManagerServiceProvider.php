@@ -49,6 +49,6 @@ class LaravelPermissionManagerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-//        $this->app->make('ManukMinasyan\LaravelPermissionManager\LaravelPermissionManagerController');
+        $this->app->make('ManukMinasyan\LaravelPermissionManager\LaravelPermissionManager');
     }
 }
