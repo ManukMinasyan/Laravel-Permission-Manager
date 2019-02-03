@@ -19,29 +19,24 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($routes as $key => $route)
-                    <tr>
-                        <th class="text-center" scope="row">{{ $key+1 }}</th>
-                        <td>{{ $route->uri }}</td>
-                        <td>{{ $route->action['as'] }}</td>
-                        <td>{{ is_string($route->action['uses']) ? $route->action['uses'] : '' }}</td>
-                        <td class="d-none d-sm-table-cell">
-                            <span class="badge badge-primary">Personal</span>
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip"
-                                        title="Edit">
-                                    <i class="fa fa-pencil"></i>
-                                </button>
-                                <button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip"
-                                        title="Delete">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
+                <tr>
+                    <th class="text-center" scope="row">1</th>
+                    <td class="d-none d-sm-table-cell">
+                        <span class="badge badge-primary">Personal</span>
+                    </td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip"
+                                    title="Edit">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip"
+                                    title="Delete">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>

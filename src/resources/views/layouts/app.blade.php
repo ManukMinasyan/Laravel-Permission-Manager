@@ -115,7 +115,7 @@
                 <div class="content-side content-side-full">
                     <ul class="nav-main">
                         <li>
-                            <a class="active" href="be_pages_dashboard.html"><i class="si si-cup"></i><span class="sidebar-mini-hide">Dashboard</span></a>
+                            <a class="active" href="{{ route('lpm.home') }}"><i class="si si-cup"></i><span class="sidebar-mini-hide">Dashboard</span></a>
                         </li>
                         <li>
                             <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-settings"></i><span class="sidebar-mini-hide">Configs</span></a>
@@ -124,10 +124,10 @@
                                     <a href="{{ route('lpm.models.index') }}"><span class="sidebar-mini-hide">Models</span></a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('lpm.routes.index') }}"><span class="sidebar-mini-hide">Roles</span></a>
+                                    <a href="{{ route('lpm.roles.index') }}"><span class="sidebar-mini-hide">Roles</span></a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('lpm.routes.index') }}"><span class="sidebar-mini-hide">Permissions</span></a>
+                                    <a href="{{ route('lpm.permissions.index') }}"><span class="sidebar-mini-hide">Permissions</span></a>
                                 </li>
                             </ul>
                         </li>
