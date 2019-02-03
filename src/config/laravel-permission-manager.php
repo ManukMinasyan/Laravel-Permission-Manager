@@ -11,6 +11,7 @@ return [
         'model_table' => 'permission_manager_models'
     ],
 
+    'user_model' => \App\Models\User::class,
 
     'middleware' => [
 //          'auth',

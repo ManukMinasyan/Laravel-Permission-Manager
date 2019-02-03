@@ -14,6 +14,14 @@ Route::group([
         Route::get('/', 'ModelsController@index')->name('index');
     });
 
+    Route::group(['prefix' => 'roles', 'as' => 'roles.'], function(){
+        Route::get('/', 'RolesController@index')->name('index');
+    });
+
+    Route::group(['prefix' => 'permissions', 'as' => 'permissions.'], function(){
+        Route::get('/', 'RolesController@index')->name('index');
+    });
+
     Route::group(['prefix' => 'routes', 'as' => 'routes.'], function(){
         Route::get('/', 'RoutesController@index')->name('index');
     });

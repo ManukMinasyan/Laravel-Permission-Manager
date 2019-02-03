@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use ManukMinasyan\LaravelPermissionManager\Traits\PermissionManagerTrait;
 
-class RoutesController extends Controller
+class RolesController extends Controller
 {
     use PermissionManagerTrait;
 
@@ -21,10 +21,8 @@ class RoutesController extends Controller
      */
     public function index()
     {
-        $routes = Route::getRoutes()->getRoutesByName();
+       $roles = [];
 
-        $routes = $this->getAssocRoutes($routes);
-
-        return view('laravel-permission-manager::routes.index', compact('routes'));
+        return view('laravel-permission-manager::roles.index', compact('roles'));
     }
 }

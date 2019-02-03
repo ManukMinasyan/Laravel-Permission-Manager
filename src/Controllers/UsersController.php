@@ -16,8 +16,13 @@ class UsersController extends Controller
 {
     use PermissionManagerTrait;
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
-        echo 'users';
+        $users = config('laravel-permission-manager.user_model')::all();
+
+        return view('laravel-permission-manager::users.index', compact('users'));
     }
 }

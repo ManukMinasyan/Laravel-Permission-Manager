@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Manuk
+ * User: Manuk Minasyan
  * Date: 01/02/2019
  * Time: 22:25
  */
@@ -13,15 +13,11 @@ use Illuminate\Support\Facades\Route;
 
 class GeneralController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         return view('laravel-permission-manager::index');
-    }
-
-    public function routes()
-    {
-        $routes = Route::getRoutes()->getRoutes();
-
-        return view();
     }
 }

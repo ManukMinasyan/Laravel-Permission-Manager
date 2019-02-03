@@ -121,7 +121,13 @@
                             <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-settings"></i><span class="sidebar-mini-hide">Configs</span></a>
                             <ul>
                                 <li>
-                                    <a href="{{ route('lpm.routes.index') }}"><span class="sidebar-mini-hide">Models</span></a>
+                                    <a href="{{ route('lpm.models.index') }}"><span class="sidebar-mini-hide">Models</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('lpm.routes.index') }}"><span class="sidebar-mini-hide">Roles</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('lpm.routes.index') }}"><span class="sidebar-mini-hide">Permissions</span></a>
                                 </li>
                             </ul>
                         </li>

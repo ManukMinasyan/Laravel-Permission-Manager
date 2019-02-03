@@ -7,12 +7,19 @@
     "authors": [
         {
             "name": "Manuk",
-            "email": "manuk.minasyan1@gmail.com"
+            "email": "manuk.minasyan1@gmail.com",
+            "homepage": "https://minasyan.info",
+            "role": "Developer"
         }
     ],
+    "support": {
+        "email": "manuk.minasyan1@gmail.com",
+        "issues": "https://github.com/ManukMinasyan/Laravel-Permission-Manager/issues"
+    },
     "minimum-stability": "dev",
     "require": {
         "php": "^7.1",
+        "silber/bouncer": "v1.0.0-rc.4",
         "illuminate/support": "5.5.* || 5.6.* || 5.7.*"
     }
 }
