@@ -41,7 +41,16 @@ trait PermissionManagerTrait
             $rel   = $item->getRelativePathName();
             $class = sprintf('\%s%s%s', $appNamespace, $modelNamespace ? $modelNamespace . '\\' : '',
                 implode('\\', explode('/', substr($rel, 0, strrpos($rel, '.')))));
-            return class_exists($class) ? $class : null;
+            if(class_exists($class)){
+                $model = [
+                    'name' => str_replace('.php', '', $item->getFilename()),
+                    'path' => $class
+                    ];
+            }else{
+                $model = null;
+            }
+
+            return $model;
         })->filter();
 
         return $models;

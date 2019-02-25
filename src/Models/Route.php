@@ -10,18 +10,16 @@ namespace ManukMinasyan\LaravelPermissionManager\Models;
 
 use Illuminate\Database\Eloquent\Model as LaravelModel;
 
-class Model extends LaravelModel
+class Route extends LaravelModel
 {
     protected $table;
-
-    protected $fillable = ['model', 'activated'];
 
     /**
      * Model constructor.
      */
     public function __construct()
     {
-        $this->table = config('laravel-permission-manager.database.model_table');
+        $this->table = config('laravel-permission-manager.database.route_table');
         parent::__construct();
     }
 }

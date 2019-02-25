@@ -9,6 +9,7 @@
 namespace ManukMinasyan\LaravelPermissionManager;
 
 use Illuminate\Support\ServiceProvider;
+use ManukMinasyan\LaravelPermissionManager\Middleware\GeneralMiddleware;
 
 class LaravelPermissionManagerServiceProvider extends ServiceProvider
 {
@@ -36,6 +37,9 @@ class LaravelPermissionManagerServiceProvider extends ServiceProvider
         ], 'assets');
 
         $this->registerHelpers();
+
+        $router = $this->app['router'];
+        $router->pushMiddlewareToGroup('web', GeneralMiddleware::class);
     }
 
     /**

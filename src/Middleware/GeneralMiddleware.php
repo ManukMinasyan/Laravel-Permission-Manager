@@ -10,7 +10,6 @@ namespace ManukMinasyan\LaravelPermissionManager\Middleware;
 
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
 class GeneralMiddleware
 {
@@ -24,10 +23,9 @@ class GeneralMiddleware
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/home');
-        }
+       $routeName = $request->route()->getName();
 
-        return $next($request);
+
+       return $next($request);
     }
 }
