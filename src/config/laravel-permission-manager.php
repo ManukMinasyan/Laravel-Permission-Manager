@@ -3,12 +3,12 @@
  * Created by PhpStorm.
  * User: Manuk Minasyan
  * Date: 01/02/2019
- * Time: 22:46
+ * Time: 22:46.
  */
 
 return [
     'database' => [
-        'model_table' => 'permission_manager_models'
+        'model_table' => 'permission_manager_models',
     ],
 
     'user_model' => \App\Models\User::class,
@@ -17,5 +17,5 @@ return [
           'web', 'auth',
     ],
 
-    'route' => 'permission-manager'
+    'route' => 'permission-manager',
 ];
