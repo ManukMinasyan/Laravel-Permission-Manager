@@ -19,12 +19,12 @@ class RoutesController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function get()
     {
         $routes = Route::getRoutes()->getRoutesByName();
 
         $routes = $this->getAssocRoutes($routes);
 
-        return view('laravel-permission-manager::routes.index', compact('routes'));
+        return response()->json($routes);
     }
 }

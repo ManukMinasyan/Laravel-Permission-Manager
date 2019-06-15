@@ -22,4 +22,9 @@ class Route extends LaravelModel
         $this->table = config('laravel-permission-manager.database.route_table');
         parent::__construct();
     }
+
+    public function abilities()
+    {
+        return $this->belongsToMany(Ability::class, config('laravel-permission-manager.database.route_permission_table'));
+    }
 }

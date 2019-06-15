@@ -1647,7 +1647,6 @@ var Codebase = function() {
             // CORE HELPERS
             uiHelperCoreToggleClass();
             uiHelperCoreScrollTo();
-            uiHelperCoreYearCopy();
             uiHelperCoreTooltip();
             uiHelperCorePopover();
             uiHelperCoreTab();
@@ -1712,9 +1711,6 @@ var Codebase = function() {
                     break;
                 case 'core-toggle-class':
                     uiHelperCoreToggleClass();
-                    break;
-                case 'core-year-copy':
-                    uiHelperCoreYearCopy();
                     break;
                 case 'core-appear':
                     uiHelperCoreAppear();

@@ -1,134 +1,53 @@
-@extends('laravel-permission-manager::layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-@section('content')
-    <div class="row gutters-tiny invisible" data-toggle="appear">
-        <!-- Row #1 -->
-        <div class="col-6 col-xl-6">
-            <a class="block block-link-shadow text-right" href="javascript:void(0)">
-                <div class="block-content block-content-full clearfix">
-                    <div class="float-left mt-10 d-none d-sm-block">
-                        <i class="si si-users fa-3x text-body-bg-dark"></i>
-                    </div>
-                    <div class="font-size-h3 font-w600" data-toggle="countTo" data-speed="1000" data-to="4252">0</div>
-                    <div class="font-size-sm font-w600 text-uppercase text-muted">Users</div>
-                </div>
-            </a>
-        </div>
-        <div class="col-6 col-xl-6">
-            <a class="block block-link-shadow text-right" href="javascript:void(0)">
-                <div class="block-content block-content-full clearfix">
-                    <div class="float-left mt-10 d-none d-sm-block">
-                        <i class="si si-link fa-3x text-body-bg-dark"></i>
-                    </div>
-                    <div class="font-size-h3 font-w600" data-toggle="countTo" data-speed="1000" data-to="38">0</div>
-                    <div class="font-size-sm font-w600 text-uppercase text-muted">Routes</div>
-                </div>
-            </a>
-        </div>
-        <!-- END Row #1 -->
-    </div>
-    <div class="row gutters-tiny invisible" data-toggle="appear">
-        <!-- Row #2 -->
-        <div class="col-md-6">
-            <div class="block">
-                <div class="block-header">
-                    <h3 class="block-title">
-                        Sales
-                        <small>This week</small>
-                    </h3>
-                    <div class="block-options">
-                        <button type="button" class="btn-block-option" data-toggle="block-option"
-                                data-action="state_toggle" data-action-mode="demo">
-                            <i class="si si-refresh"></i>
-                        </button>
-                        <button type="button" class="btn-block-option">
-                            <i class="si si-wrench"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="block-content block-content-full">
-                    <div class="pull-all">
-                        <!-- Lines Chart Container -->
-                        <canvas class="js-chartjs-dashboard-lines"></canvas>
-                    </div>
-                </div>
-                <div class="block-content">
-                    <div class="row items-push">
-                        <div class="col-6 col-sm-4 text-center text-sm-left">
-                            <div class="font-size-sm font-w600 text-uppercase text-muted">This Month</div>
-                            <div class="font-size-h4 font-w600">720</div>
-                            <div class="font-w600 text-success">
-                                <i class="fa fa-caret-up"></i> +16%
-                            </div>
-                        </div>
-                        <div class="col-6 col-sm-4 text-center text-sm-left">
-                            <div class="font-size-sm font-w600 text-uppercase text-muted">This Week</div>
-                            <div class="font-size-h4 font-w600">160</div>
-                            <div class="font-w600 text-danger">
-                                <i class="fa fa-caret-down"></i> -3%
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4 text-center text-sm-left">
-                            <div class="font-size-sm font-w600 text-uppercase text-muted">Average</div>
-                            <div class="font-size-h4 font-w600">24.3</div>
-                            <div class="font-w600 text-success">
-                                <i class="fa fa-caret-up"></i> +9%
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="block">
-                <div class="block-header">
-                    <h3 class="block-title">
-                        Earnings
-                        <small>This week</small>
-                    </h3>
-                    <div class="block-options">
-                        <button type="button" class="btn-block-option" data-toggle="block-option"
-                                data-action="state_toggle" data-action-mode="demo">
-                            <i class="si si-refresh"></i>
-                        </button>
-                        <button type="button" class="btn-block-option">
-                            <i class="si si-wrench"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="block-content block-content-full">
-                    <div class="pull-all">
-                        <!-- Lines Chart Container -->
-                        <canvas class="js-chartjs-dashboard-lines2"></canvas>
-                    </div>
-                </div>
-                <div class="block-content bg-white">
-                    <div class="row items-push">
-                        <div class="col-6 col-sm-4 text-center text-sm-left">
-                            <div class="font-size-sm font-w600 text-uppercase text-muted">This Month</div>
-                            <div class="font-size-h4 font-w600">$ 6,540</div>
-                            <div class="font-w600 text-success">
-                                <i class="fa fa-caret-up"></i> +4%
-                            </div>
-                        </div>
-                        <div class="col-6 col-sm-4 text-center text-sm-left">
-                            <div class="font-size-sm font-w600 text-uppercase text-muted">This Week</div>
-                            <div class="font-size-h4 font-w600">$ 1,525</div>
-                            <div class="font-w600 text-danger">
-                                <i class="fa fa-caret-down"></i> -7%
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4 text-center text-sm-left">
-                            <div class="font-size-sm font-w600 text-uppercase text-muted">Balance</div>
-                            <div class="font-size-h4 font-w600">$ 9,352</div>
-                            <div class="font-w600 text-success">
-                                <i class="fa fa-caret-up"></i> +35%
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END Row #2 -->
-    </div>
-@endsection
+    <title>Laravel Permission Manager</title>
+
+    <meta name="description" content="Laravel Permission Manager by Manuk Minasyan">
+    <meta name="author" content="Manuk Minasyan">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Open Graph Meta -->
+    <meta property="og:title" content="Laravel Permission Manager">
+    <meta property="og:site_name" content="Laravel Permission Manager">
+    <meta property="og:description" content="Laravel Permission Manager by Manuk Minasyan">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- Icons -->
+    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+    <link rel="shortcut icon" href="{{ packageAsset('img/favicons/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ packageAsset('img/favicons/favicon-192x192.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ packageAsset('img/favicons/apple-touch-icon-180x180.png') }}">
+    <!-- END Icons -->
+
+    <!-- Stylesheets -->
+    <!-- Codebase framework -->
+    <link rel="stylesheet" id="css-main" href="{{ packageAsset('css/codebase.min.css') }}">
+
+    <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+    <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
+<!-- END Stylesheets -->
+</head>
+<body>
+
+<!-- LaravelPermissionManager App -->
+<div id="lpm-app"></div>
+
+<!-- Codebase Core JS -->
+<script src="{{ packageAsset('js/laravel-permission-manager.app.js') }}"></script>
+<script src="{{ packageAsset('js/core/jquery.min.js') }}"></script>
+<script src="{{ packageAsset('js/core/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ packageAsset('js/core/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ packageAsset('js/core/jquery.scrollLock.min.js') }}"></script>
+<script src="{{ packageAsset('js/core/jquery.appear.min.js') }}"></script>
+<script src="{{ packageAsset('js/core/jquery.countTo.min.js') }}"></script>
+<script src="{{ packageAsset('js/core/js.cookie.min.js') }}"></script>
+<script src="{{ packageAsset('js/codebase.js') }}"></script>
+</body>
+</html>

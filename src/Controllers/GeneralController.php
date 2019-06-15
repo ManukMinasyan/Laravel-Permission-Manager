@@ -9,9 +9,12 @@
 namespace ManukMinasyan\LaravelPermissionManager;
 
 use App\Http\Controllers\Controller;
+use ManukMinasyan\LaravelPermissionManager\Traits\PermissionManagerTrait;
 
 class GeneralController extends Controller
 {
+    use PermissionManagerTrait;
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

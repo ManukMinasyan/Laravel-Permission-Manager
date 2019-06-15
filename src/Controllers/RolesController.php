@@ -24,7 +24,7 @@ class RolesController extends Controller
     {
         $roles = Role::all();
 
-        return view('laravel-permission-manager::roles.index', compact('roles'));
+        return response()->json($roles);
     }
 
     /**
@@ -44,9 +44,9 @@ class RolesController extends Controller
     {
         $data = $request->only('title', 'name');
 
-        Role::firstOrCreate($data);
+        $role = Role::firstOrCreate($data);
 
-        return redirect()->back();
+        return response()->json(['status' => 'success', 'data' => $role]);
     }
 
     /**
@@ -72,14 +72,19 @@ class RolesController extends Controller
         $role = Role::find($role_id);
         $role->update($data);
 
-        return redirect()->back();
+        return redirect()->back()->with('status', 'Role Successfully Updated!');
     }
 
-    /**
-     *
-     */
-    public function delete()
-    {
 
+    /**
+     * @param Role $role
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy(Role $role)
+    {
+        $role->delete();
+
+        return response()->json(['status' => 'Role Successfully Deleted!']);
     }
 }

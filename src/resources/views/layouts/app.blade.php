@@ -32,6 +32,7 @@
 
     <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
     <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
+    @stack('styles')
     <!-- END Stylesheets -->
 </head>
 <body>
@@ -287,7 +288,14 @@
 
 <!-- Page JS Plugins -->
 <script src="{{ packageAsset('js/plugins/chartjs/Chart.bundle.min.js') }}"></script>
-
+@stack('scripts')
+<script src="{{ packageAsset('js/pages/be_forms_plugins.js') }}"></script>
+<script>
+    jQuery(function () {
+        // Init page helpers (BS Datepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Input + Range Sliders + Tags Inputs plugins)
+        Codebase.helpers(['datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider', 'tags-inputs']);
+    });
+</script>
 <!-- Page JS Code -->
 <script src="{{ packageAsset('js/pages/be_pages_dashboard.js') }}"></script>
 </body>

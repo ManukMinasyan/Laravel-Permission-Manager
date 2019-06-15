@@ -9,9 +9,14 @@
 namespace ManukMinasyan\LaravelPermissionManager;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use ManukMinasyan\LaravelPermissionManager\Models\Ability;
+use ManukMinasyan\LaravelPermissionManager\Models\Role;
+use ManukMinasyan\LaravelPermissionManager\Requests\PermissionRequest;
 use ManukMinasyan\LaravelPermissionManager\Traits\PermissionManagerTrait;
+use Bouncer;
+use Silber\Bouncer\BouncerFacade;
 
 class PermissionsController extends Controller
 {
@@ -22,10 +27,10 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        dd(Ability::all());
-        $permissions = [];
+        $abilities = Ability::with('roles')->get();
 
-        return view('laravel-permission-manager::permissions.index', compact('permissions'));
+        return response()->json($abilities);
+
     }
 
     /**
@@ -38,16 +43,20 @@ class PermissionsController extends Controller
 
 
     /**
-     * @param RoleRequest $request
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(RoleRequest $request)
+    public function store(PermissionRequest $request)
     {
-        $data = $request->only('title', 'name');
+        $dataAbility = $request->only('title', 'name');
 
-        BouncerFacade::role()->firstOrCreate($data);
+        $ability = Ability::firstOrCreate($dataAbility);
 
-        return redirect()->back();
+        if(isset($request['roles'])){
+            $ability->roles()->sync(collect($request['roles'])->pluck('id'));
+        }
+
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -79,8 +88,9 @@ class PermissionsController extends Controller
     /**
      *
      */
-    public function delete()
+    public function destroy($ability)
     {
-
+        Ability::find($ability)->delete();
+        return response()->json($ability);
     }
 }

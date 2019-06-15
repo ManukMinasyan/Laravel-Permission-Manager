@@ -1,4 +1,4 @@
-@extends('laravel-permission-manager::layouts.app')
+@extends('laravel-permission-manager::layouts.laravelPermissionManagerApp')
 
 @section('content')
     <!-- Striped Table -->
@@ -10,6 +10,7 @@
             </div>
         </div>
         <div class="block-content">
+            @include('laravel-permission-manager::components.alert-component')
             <table class="table table-striped table-vcenter">
                 <thead>
                 <tr>
@@ -35,10 +36,13 @@
                                         title="Edit">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                                <button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip"
-                                        title="Delete">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                                <form action="{{ route('lpm.roles.destroy', $role->id) }}" method="post">
+                                    @method('delete') @csrf
+                                    <button type="submit" class="btn btn-sm btn-secondary" data-toggle="tooltip"
+                                            title="Delete">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>

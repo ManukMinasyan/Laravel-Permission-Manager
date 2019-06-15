@@ -1,4 +1,4 @@
-@extends('laravel-permission-manager::layouts.app')
+@extends('laravel-permission-manager::layouts.laravelPermissionManagerApp')
 
 @section('content')
     <!-- Striped Table -->

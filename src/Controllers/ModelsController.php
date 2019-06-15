@@ -21,7 +21,7 @@ class ModelsController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function get()
     {
         // Models except user model
         $models = $this->getModels()->filter(function ($model) {
@@ -29,6 +29,6 @@ class ModelsController extends Controller
             return $model['path'] !== $user_model && substr($model['path'], 1) !== $user_model;
         });
 
-        return view('laravel-permission-manager::models.index', compact('models'));
+        return response()->json($models);
     }
 }

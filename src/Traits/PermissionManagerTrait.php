@@ -29,6 +29,16 @@ trait PermissionManagerTrait
         return collect($finalRoutes);
     }
 
+    private function getRouteNamespaces($routes)
+    {
+        $i = 0;
+        $finalNamespaces = [];
+        foreach($routes as $route) {
+            $finalNamespaces[$i++] = $route->action['namespace'];
+        }
+
+        return collect($finalNamespaces);
+    }
 
     /**
      * @return \Illuminate\Support\Collection
