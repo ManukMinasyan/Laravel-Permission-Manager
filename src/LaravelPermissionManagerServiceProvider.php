@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Manuk Minasyan
  * Date: 01/02/2019
- * Time: 22:25
+ * Time: 22:25.
  */
 
 namespace ManukMinasyan\LaravelPermissionManager;
@@ -20,20 +20,20 @@ class LaravelPermissionManagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__ . '/routes/permission-manager.php');
+        $this->loadRoutesFrom(__DIR__.'/routes/permission-manager.php');
         $this->loadMigrationsFrom(__DIR__.'/migrations');
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'laravel-permission-manager');
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'laravel-permission-manager');
 
         $this->publishes([
-            __DIR__ . '/config/laravel-permission-manager.php' => config_path('laravel-permission-manager.php'),
+            __DIR__.'/config/laravel-permission-manager.php' => config_path('laravel-permission-manager.php'),
         ], 'config');
 
         $this->publishes([
-            __DIR__ . '/views' => base_path('resources/views/permission-manager/views'),
+            __DIR__.'/views' => base_path('resources/views/permission-manager/views'),
         ]);
 
         $this->publishes([
-            __DIR__ . '/assets' => public_path('vendor/ManukMinasyan/LaravelPermissionManager'),
+            __DIR__.'/assets' => public_path('vendor/ManukMinasyan/LaravelPermissionManager'),
         ], 'assets');
 
         $this->registerHelpers();
@@ -43,11 +43,11 @@ class LaravelPermissionManagerServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register helpers file
+     * Register helpers file.
      */
     private function registerHelpers()
     {
-        if (file_exists($file = __DIR__ . '/helpers/helpers.php')) {
+        if (file_exists($file = __DIR__.'/helpers/helpers.php')) {
             require_once $file;
         }
     }

@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Manuk Minasyan
  * Date: 01/02/2019
- * Time: 22:25
+ * Time: 22:25.
  */
 
 namespace ManukMinasyan\LaravelPermissionManager;
@@ -35,9 +35,9 @@ class RolesController extends Controller
         return view('laravel-permission-manager::roles.create', compact('roles'));
     }
 
-
     /**
      * @param RoleRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(RoleRequest $request)
@@ -51,6 +51,7 @@ class RolesController extends Controller
 
     /**
      * @param $role_id
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($role_id)
@@ -63,6 +64,7 @@ class RolesController extends Controller
     /**
      * @param RoleRequest $request
      * @param $role_id
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(RoleRequest $request, $role_id)
@@ -74,7 +76,6 @@ class RolesController extends Controller
 
         return redirect()->back()->with('status', 'Role Successfully Updated!');
     }
-
 
     /**
      * @param Role $role
