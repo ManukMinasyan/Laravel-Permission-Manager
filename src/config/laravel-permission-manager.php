@@ -9,11 +9,10 @@
 return [
     'database' => [
         'model_table' => 'permission_manager_models',
-<<<<<<< HEAD
+
+        'group_table' => 'permission_manager_groups',
         'route_table' => 'permission_manager_routes',
         'route_permission_table' => 'permission_manager_route_permission'
-=======
->>>>>>> 17f44b0e682a188257a283d83648774cb7913100
     ],
 
     'user_model' => \App\Models\User::class,

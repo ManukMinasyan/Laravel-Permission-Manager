@@ -801,20 +801,19 @@ var Codebase = function() {
     };
 
     // Bootstrap tab, for more examples you can check out http://getbootstrap.com/docs/4.0/components/navs/#tabs
-    var uiHelperCoreTab = function() {
-        jQuery('[data-toggle="tabs"]:not(.js-tabs-enabled)').add('.js-tabs:not(.js-tabs-enabled)').each(function(){
-            var el = jQuery(this);
-
-            // Add .js-tabs-enabled class to tag it as activated
-            el.addClass('js-tabs-enabled');
-
-            // Init
-            el.find('a').on('click.cb.helpers.core', function(e){
-                e.preventDefault();
-                jQuery(this).tab('show');
-            });
-        });
-    };
+    // var uiHelperCoreTab = function() {
+    //     jQuery('[data-toggle="tabs"]:not(.js-tabs-enabled)').add('.js-tabs:not(.js-tabs-enabled)').each(function(){
+    //         var el = jQuery(this);
+    //
+    //         // Add .js-tabs-enabled class to tag it as activated
+    //         el.addClass('js-tabs-enabled');
+    //         // Init
+    //         el.find('a').on('click.cb.helpers.core', function(e){
+    //             e.preventDefault();
+    //             jQuery(this).tab('show');
+    //         });
+    //     });
+    // };
 
     // jQuery Appear, for more examples you can check out https://github.com/bas2k/jquery.appear
     var uiHelperCoreAppear = function(){
@@ -1649,7 +1648,6 @@ var Codebase = function() {
             uiHelperCoreScrollTo();
             uiHelperCoreTooltip();
             uiHelperCorePopover();
-            uiHelperCoreTab();
             uiHelperCoreAppear();
             uiHelperCoreAppearCountTo();
             uiHelperCoreSlimscroll();
@@ -1702,9 +1700,6 @@ var Codebase = function() {
                     break;
                 case 'core-popover':
                     uiHelperCorePopover();
-                    break;
-                case 'core-tab':
-                    uiHelperCoreTab();
                     break;
                 case 'core-scrollTo':
                     uiHelperCoreScrollTo();

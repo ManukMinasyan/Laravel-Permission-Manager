@@ -40,9 +40,9 @@
 <div id="lpm-app"></div>
 
 <!-- Codebase Core JS -->
-<script src="{{ packageAsset('js/laravel-permission-manager.app.js') }}"></script>
 <script src="{{ packageAsset('js/core/jquery.min.js') }}"></script>
 <script src="{{ packageAsset('js/core/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ packageAsset('js/laravel-permission-manager.app.js') }}"></script>
 <script src="{{ packageAsset('js/core/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ packageAsset('js/core/jquery.scrollLock.min.js') }}"></script>
 <script src="{{ packageAsset('js/core/jquery.appear.min.js') }}"></script>

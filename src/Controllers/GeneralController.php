@@ -9,6 +9,7 @@
 namespace ManukMinasyan\LaravelPermissionManager;
 
 use App\Http\Controllers\Controller;
+use ManukMinasyan\LaravelPermissionManager\Models\Role;
 use ManukMinasyan\LaravelPermissionManager\Traits\PermissionManagerTrait;
 
 class GeneralController extends Controller
@@ -20,6 +21,9 @@ class GeneralController extends Controller
      */
     public function index()
     {
+
+//        $roles = Role::with('abilities')->get();
+//        dd($roles);
         return view('laravel-permission-manager::index');
     }
 }

@@ -16,7 +16,6 @@ use ManukMinasyan\LaravelPermissionManager\Models\Role;
 use ManukMinasyan\LaravelPermissionManager\Requests\PermissionRequest;
 use ManukMinasyan\LaravelPermissionManager\Traits\PermissionManagerTrait;
 use Bouncer;
-use Silber\Bouncer\BouncerFacade;
 
 class PermissionsController extends Controller
 {
@@ -30,7 +29,6 @@ class PermissionsController extends Controller
         $abilities = Ability::with('roles')->get();
 
         return response()->json($abilities);
-
     }
 
     /**
@@ -52,8 +50,12 @@ class PermissionsController extends Controller
 
         $ability = Ability::firstOrCreate($dataAbility);
 
-        if(isset($request['roles'])){
-            $ability->roles()->sync(collect($request['roles'])->pluck('id'));
+        if (isset($request['roles'])) {
+            Bouncer::sync($ability)->roles(collect($request['roles'])->pluck('id'));
+            collect($request['roles'])->each(function ($role) use ($ability) {
+                $role = Role::find($role['id']);
+                $role->abilities()->syncWithoutDetaching([$ability->id]);
+            });
         }
 
         return response()->json(['success' => true]);
@@ -75,14 +77,22 @@ class PermissionsController extends Controller
      * @param $role_id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(RoleRequest $request, $role_id)
+    public function update(PermissionRequest $request, $permission_id)
     {
-        $data = $request->only('title', 'name');
+        $data = $request->only('title', 'name', 'roles');
 
-        $role = Role::find($role_id);
-        $role->update($data);
+        $ability = Ability::find($permission_id);
+        $ability->update($data);
 
-        return redirect()->back();
+        if (isset($data['roles'])) {
+            Bouncer::sync($ability)->roles(collect($request['roles'])->pluck('id'));
+            collect($request['roles'])->each(function ($role) use ($ability) {
+                $role = Role::find($role['id']);
+                $role->abilities()->syncWithoutDetaching([$ability->id]);
+            });
+        }
+
+        return response()->json(['success' => true]);
     }
 
     /**

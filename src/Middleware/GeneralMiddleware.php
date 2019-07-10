@@ -14,24 +14,15 @@ use ManukMinasyan\LaravelPermissionManager\Models\Route;
 
 class GeneralMiddleware
 {
+
     /**
-     * Handle an incoming request.
-     *
-<<<<<<< HEAD
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
-     * @param  string|null $guard
-=======
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
-     * @param string|null              $guard
-     *
->>>>>>> 17f44b0e682a188257a283d83648774cb7913100
-     * @return mixed
+     * @param $request
+     * @param Closure $next
+     * @param null $guard
+     * @return mixed|void
      */
     public function handle($request, Closure $next, $guard = null)
     {
-<<<<<<< HEAD
         $actionMethod = $request->route()->getAction()['uses'];
         $route = Route::where('action_method', $actionMethod)->first();
 
@@ -48,10 +39,7 @@ class GeneralMiddleware
             return abort(403);
         }
 
-=======
-        $routeName = $request->route()->getName();
 
->>>>>>> 17f44b0e682a188257a283d83648774cb7913100
         return $next($request);
     }
 }
