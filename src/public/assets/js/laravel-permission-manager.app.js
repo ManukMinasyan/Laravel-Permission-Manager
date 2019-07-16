@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "vendor/ManukMinasyan/LaravelPermissionManager/js/async/" + ({}[chunkId]||chunkId) + ".js?" + {"0":"a4b8a42afc49a938edad","1":"56b074c4430aca8292a3","2":"2675bd2ca62b962635c8","3":"3039e44d17d5f38b7ea6","4":"b485ea80ad45b6971d63","5":"62aa798e86e2451fb498","6":"231f7bf6c02e256e8448","7":"7bfee91dd8655daa9bbc","8":"726ec4000e4e4a785b51","9":"e8f5e16b20b59b0600d8"}[chunkId] + ""
+/******/ 		return __webpack_require__.p + "vendor/ManukMinasyan/LaravelPermissionManager/js/async/" + ({}[chunkId]||chunkId) + ".js?" + {"0":"a4b8a42afc49a938edad","1":"56b074c4430aca8292a3","2":"1c0b9ceb56561792702c","3":"fd36db28e17bd4aff3de","4":"b485ea80ad45b6971d63","5":"fd8bb933cf1aab79aebd","6":"231f7bf6c02e256e8448","7":"4612dbe70c3e82c10a71","8":"642e892ba18448a08bb2","9":"15bcb140acbc73b7448f","10":"9d666e04fe9ec81be910"}[chunkId] + ""
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -52879,15 +52879,15 @@ var map = {
 	],
 	"./MainComponent.vue": [
 		"./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/MainComponent.vue",
-		9
+		10
 	],
 	"./pages/Model/ModelsComponent.vue": [
 		"./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Model/ModelsComponent.vue",
 		0,
 		7
 	],
-	"./pages/Role/AddNewRoleComponent.vue": [
-		"./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue",
+	"./pages/Role/AddGroupComponent.vue": [
+		"./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddGroupComponent.vue",
 		8
 	],
 	"./pages/Role/AddPermissionComponent.vue": [
@@ -52895,6 +52895,10 @@ var map = {
 		0,
 		4,
 		3
+	],
+	"./pages/Role/AddRoleComponent.vue": [
+		"./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddRoleComponent.vue",
+		9
 	],
 	"./pages/Role/RolesPermissionsComponent.vue": [
 		"./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/RolesPermissionsComponent.vue",

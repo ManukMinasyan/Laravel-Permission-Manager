@@ -1,0 +1,19 @@
+//
+// Print
+// --------------------------------------------------
+
+@media print {
+    #page-container,
+    #main-container {
+        padding: 0 !important;
+    }
+
+    #page-header,
+    #page-footer,
+    #page-loader,
+    #sidebar,
+    #side-overlay,
+    .block-options {
+        display: none !important;
+    }
+}

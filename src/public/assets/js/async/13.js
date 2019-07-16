@@ -2,7 +2,7 @@
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddRoleComponent.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../repositories/RepositoryFactory */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/RepositoryFactory.js");
-/* harmony import */ var _AddNewRoleComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AddNewRoleComponent */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue");
+/* harmony import */ var _AddNewRoleComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AddNewRoleComponent */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddRoleComponent.vue");
 /* harmony import */ var _AddPermissionComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AddPermissionComponent */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddPermissionComponent.vue");
 /* harmony import */ var _helper_components_TabsComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../helper-components/TabsComponent */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/helper-components/TabsComponent.vue");
 /* harmony import */ var _helper_components_TabComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../helper-components/TabComponent */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/helper-components/TabComponent.vue");
@@ -567,7 +567,7 @@ if(false) {}
 
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue?vue&type=template&id=0b4d28f0&scoped=true&":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue?vue&type=template&id=0b4d28f0&scoped=true& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddRoleComponent.vue?vue&type=template&id=0b4d28f0&scoped=true& ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -1353,15 +1353,15 @@ if(false) {}
 
 /***/ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue":
 /*!********************************************************************************************************************!*\
-  !*** ./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue ***!
+  !*** ./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddRoleComponent.vue ***!
   \********************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AddNewRoleComponent_vue_vue_type_template_id_0b4d28f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddNewRoleComponent.vue?vue&type=template&id=0b4d28f0&scoped=true& */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue?vue&type=template&id=0b4d28f0&scoped=true&");
-/* harmony import */ var _AddNewRoleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddNewRoleComponent.vue?vue&type=script&lang=js& */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _AddNewRoleComponent_vue_vue_type_template_id_0b4d28f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddRoleComponent.vue?vue&type=template&id=0b4d28f0&scoped=true& */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddRoleComponent.vue?vue&type=template&id=0b4d28f0&scoped=true&");
+/* harmony import */ var _AddNewRoleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddRoleComponent.vue?vue&type=script&lang=js& */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddRoleComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1383,35 +1383,35 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue"
+component.options.__file = "resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddRoleComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
 /***/ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************!*\
-  !*** ./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddRoleComponent.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewRoleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddNewRoleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewRoleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddRoleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddRoleComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewRoleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
 /***/ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue?vue&type=template&id=0b4d28f0&scoped=true&":
 /*!***************************************************************************************************************************************************************!*\
-  !*** ./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue?vue&type=template&id=0b4d28f0&scoped=true& ***!
+  !*** ./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddRoleComponent.vue?vue&type=template&id=0b4d28f0&scoped=true& ***!
   \***************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewRoleComponent_vue_vue_type_template_id_0b4d28f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddNewRoleComponent.vue?vue&type=template&id=0b4d28f0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddNewRoleComponent.vue?vue&type=template&id=0b4d28f0&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewRoleComponent_vue_vue_type_template_id_0b4d28f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddRoleComponent.vue?vue&type=template&id=0b4d28f0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddRoleComponent.vue?vue&type=template&id=0b4d28f0&scoped=true&");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewRoleComponent_vue_vue_type_template_id_0b4d28f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddNewRoleComponent_vue_vue_type_template_id_0b4d28f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });

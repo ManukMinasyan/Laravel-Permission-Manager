@@ -48,6 +48,7 @@
 <script src="{{ packageAsset('js/core/jquery.appear.min.js') }}"></script>
 <script src="{{ packageAsset('js/core/jquery.countTo.min.js') }}"></script>
 <script src="{{ packageAsset('js/core/js.cookie.min.js') }}"></script>
-<script src="{{ packageAsset('js/codebase.js') }}"></script>
+<script src="{{ packageAsset('js/codebase.core.min.js') }}"></script>
+<script src="{{ packageAsset('js/codebase.app.min.js') }}"></script>
 </body>
 </html>

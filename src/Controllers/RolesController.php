@@ -64,8 +64,7 @@ class RolesController extends Controller
     /**
      * @param RoleRequest $request
      * @param $role_id
-     *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(RoleRequest $request, $role_id)
     {
@@ -74,7 +73,7 @@ class RolesController extends Controller
         $role = Role::find($role_id);
         $role->update($data);
 
-        return redirect()->back()->with('status', 'Role Successfully Updated!');
+        return response()->json(['status' => 'success']);
     }
 
     /**

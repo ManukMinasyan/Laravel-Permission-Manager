@@ -1,0 +1,12 @@
+//
+// Font Awesome 5.x Overrides
+// --------------------------------------------------
+
+// Variables Override
+$fa-font-path: "../fonts/fontawesome5" !default;
+
+// Import Font Awesome 5
+@import 'fontawesome5/fontawesome';
+@import 'fontawesome5/regular';
+@import 'fontawesome5/solid';
+@import 'fontawesome5/brands';

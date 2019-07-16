@@ -1,0 +1,102 @@
+//
+// Simplebar - https://github.com/Grsmto/simplebar
+// --------------------------------------------------
+
+[data-simplebar] {
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch; // Trigger native scrolling for mobile, if not supported, plugin is used
+}
+
+[data-simplebar="init"] {
+    display: flex;
+}
+
+.simplebar-scroll-content {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    min-width: 100%;
+    box-sizing: content-box;
+}
+
+.simplebar-content {
+    overflow-x: scroll;
+    overflow-y: hidden !important;
+    box-sizing: border-box !important;
+    min-height: 100% !important;
+}
+
+.simplebar-track {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 7px;
+}
+
+.simplebar-scrollbar {
+    position: absolute;
+    right: 2px;
+    width: 4px;
+    min-height: 10px;
+}
+
+.simplebar-scrollbar::before {
+    position: absolute;
+    content: "";
+    background: black;
+    border-radius: 5px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity .2s linear;
+    background: $brand-darker;
+    background-clip: padding-box;
+
+    .sidebar-inverse #sidebar & {
+        background: $brand-lighter;
+    }
+}
+
+.simplebar-track:hover .simplebar-scrollbar {
+    // When hovered, remove all transitions from drag handle
+    opacity: .5;
+    transition: opacity 0 linear;
+}
+
+.simplebar-track:hover .simplebar-scrollbar::before,
+.simplebar-track .simplebar-scrollbar.visible::before {
+    // When hovered, remove all transitions from drag handle
+    opacity: .5;
+}
+
+.simplebar-track.vertical {
+    top: 0;
+}
+
+.simplebar-track.vertical .simplebar-scrollbar::before {
+    top: 2px;
+    bottom: 2px;
+}
+
+.simplebar-track.horizontal {
+    left: 0;
+    width: auto;
+    height: 7px;
+}
+
+.simplebar-track.horizontal .simplebar-scrollbar::before {
+    height: 100%;
+    left: 2px;
+    right: 2px;
+}
+
+.horizontal.simplebar-track .simplebar-scrollbar {
+    right: auto;
+    top: 2px;
+    height: 4px;
+    min-height: 0;
+    min-width: 10px;
+    width: auto;
+}

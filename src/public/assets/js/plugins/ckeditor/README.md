@@ -1,39 +1,79 @@
-CKEditor 4
-==========
+# CKEditor 4 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20out%20CKEditor%204%20on%20npm&url=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fckeditor)
 
-Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
-http://ckeditor.com - See LICENSE.md for license information.
+[![GitHub tag](https://img.shields.io/github/tag/ckeditor/ckeditor-releases.svg)](https://github.com/ckeditor/ckeditor-releases)
+[![Dependencies](https://img.shields.io/david/ckeditor/ckeditor-dev.svg)](https://david-dm.org/ckeditor/ckeditor-dev)
+[![Dev dependencies](https://img.shields.io/david/dev/ckeditor/ckeditor-dev.svg)](https://david-dm.org/ckeditor/ckeditor-dev?type=dev)
 
-CKEditor is a text editor to be used inside web pages. It's not a replacement
-for desktop text editors like Word or OpenOffice, but a component to be used as
-part of web applications and websites.
+[![Join newsletter](https://img.shields.io/badge/join-newsletter-00cc99.svg)](http://eepurl.com/c3zRPr)
+[![Follow twitter](https://img.shields.io/badge/follow-twitter-00cc99.svg)](https://twitter.com/ckeditor)
 
-## Documentation
+A highly configurable WYSIWYG HTML editor with hundreds of features, from creating rich text content with captioned images, videos, tables, or media embeds to pasting from Word and drag&drop image upload.
 
-The full editor documentation is available online at the following address:
-http://docs.ckeditor.com
+Supports a broad range of browsers, including legacy ones.
 
-## Installation
+![CKEditor 4 screenshot](assets/ckeditor4.png)
 
-Installing CKEditor is an easy task. Just follow these simple steps:
+## Getting Started
 
- 1. **Download** the latest version from the CKEditor website:
-    http://ckeditor.com. You should have already completed this step, but be
-    sure you have the very latest version.
- 2. **Extract** (decompress) the downloaded file into the root of your website.
+```
+npm install --save ckeditor
+```
 
-**Note:** CKEditor is by default installed in the `ckeditor` folder. You can
-place the files in whichever you want though.
+Use it on your website:
 
-## Checking Your Installation
+```html
+<div id="editor">
+    <p>This is the editor content.</p>
+</div>
+<script src="./node_modules/ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace( 'editor' );
+</script>
+```
 
-The editor comes with a few sample pages that can be used to verify that
-installation proceeded properly. Take a look at the `samples` directory.
+You can also load CKEditor 4 using [CDN](https://cdn.ckeditor.com/#ckeditor4).
 
-To test your installation, just call the following page at your website:
+## Features
 
-	http://<your site>/<CKEditor installation path>/samples/index.html
+* Over 500 plugins in the [Add-ons Repository](https://ckeditor.com/cke4/addons).
+* Pasting from Microsoft Word and Excel.
+* Drag&drop image uploads.
+* Media embeds to insert videos, tweets, maps, slideshows.
+* Powerful clipboard integration.
+* Content quality control with Advanced Content Filter.
+* Extensible widget system.
+* Custom table selection.
+* Accessibility conforming to WCAG and Section 508.
+* Over 60 localizations available with full RTL support.
 
-For example:
+## Presets
 
-	http://www.example.com/ckeditor/samples/index.html
+The CKEditor 4 npm package comes in the `standard-all` preset, so it includes all official CKEditor plugins, with those from the [standard package](https://sdk.ckeditor.com/samples/standardpreset.html) active by default.
+
+## Further Resources
+
+* [CKEditor 4 demo](https://ckeditor.com/ckeditor-4/)
+* [Documentation](https://ckeditor.com/docs/ckeditor4/latest/)
+* [API documentation](https://ckeditor.com/docs/ckeditor4/latest/api/index.html)
+* [Configuration reference](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html)
+* [CKEditor SDK with more samples](https://sdk.ckeditor.com/)
+
+If you are looking for CKEditor 5, here's a link to the relevant npm package: <https://www.npmjs.com/package/ckeditor5>
+
+## Browser Support
+
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome (Android) | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari-ios/safari-ios_48x48.png" alt="iOS Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>iOS Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
+| --------- | --------- | --------- | --------- | --------- | --------- | --------- |
+| IE8, IE9, IE10, IE11, Edge| latest version| latest version| latest version| latest version| latest version| latest version
+
+Find out more in the [Browser Compatibility guide](https://ckeditor.com/docs/ckeditor4/latest/guide/dev_browsers.html#officially-supported-browsers).
+
+## Contribute
+
+If you would like to help maintain the project, follow the [Contribution instructions](https://github.com/ckeditor/ckeditor-dev/blob/master/.github/CONTRIBUTING.md).
+
+## License
+
+Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+
+For licensing, see LICENSE.md or <https://ckeditor.com/legal/ckeditor-oss-license>

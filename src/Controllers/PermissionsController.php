@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use ManukMinasyan\LaravelPermissionManager\Models\Ability;
+use ManukMinasyan\LaravelPermissionManager\Models\Group;
 use ManukMinasyan\LaravelPermissionManager\Models\Role;
 use ManukMinasyan\LaravelPermissionManager\Requests\PermissionRequest;
 use ManukMinasyan\LaravelPermissionManager\Traits\PermissionManagerTrait;
@@ -24,62 +25,56 @@ class PermissionsController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $abilities = Ability::with('roles')->get();
 
+        $abilities = Ability::with('roles', 'group')->get();
+
+        if($request->has('group_by_group')){
+            $abilities = $abilities->groupBy('group.name')->sort()->reverse();
+        }
+        
         return response()->json($abilities);
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('laravel-permission-manager::permissions.create', compact('roles'));
-    }
-
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param PermissionRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(PermissionRequest $request)
     {
-        $dataAbility = $request->only('title', 'name');
+        $data = $request->validated();
 
-        $ability = Ability::firstOrCreate($dataAbility);
+        $ability = Ability::firstOrCreate([
+            'title' => $data['title'],
+            'name' => $data['name'],
+        ]);
 
-        if (isset($request['roles'])) {
-            Bouncer::sync($ability)->roles(collect($request['roles'])->pluck('id'));
+        if (isset($data['roles'])) {
+            Bouncer::sync($ability)->roles(collect($data['roles'])->pluck('id'));
             collect($request['roles'])->each(function ($role) use ($ability) {
-                $role = Role::find($role['id']);
+                $role = Role::findOrFail($role['id']);
                 $role->abilities()->syncWithoutDetaching([$ability->id]);
             });
         }
+        if (array_key_exists('group', $data)) {
+            $ability->group_id = Group::findOrFail($data['group']['id'])->id;
+        } elseif (array_key_exists('group', $data) && $data['group'] === null) {
+            $ability->group_id = null;
+        }
+        $ability->save();
 
         return response()->json(['success' => true]);
     }
 
     /**
-     * @param $role_id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function edit($role_id)
-    {
-        $role = Role::find($role_id);
-
-        return view('laravel-permission-manager::roles.edit', compact('role'));
-    }
-
-    /**
-     * @param RoleRequest $request
-     * @param $role_id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param PermissionRequest $request
+     * @param $permission_id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(PermissionRequest $request, $permission_id)
     {
-        $data = $request->only('title', 'name', 'roles');
+        $data = $request->validated();
 
         $ability = Ability::find($permission_id);
         $ability->update($data);
@@ -87,20 +82,30 @@ class PermissionsController extends Controller
         if (isset($data['roles'])) {
             Bouncer::sync($ability)->roles(collect($request['roles'])->pluck('id'));
             collect($request['roles'])->each(function ($role) use ($ability) {
-                $role = Role::find($role['id']);
+                $role = Role::findOrFail($role['id']);
                 $role->abilities()->syncWithoutDetaching([$ability->id]);
             });
         }
+
+        if (isset($data['group'])) {
+            $ability->group_id = Group::findOrFail($data['group']['id'])->id;
+        } elseif ($data['group'] === null) {
+            $ability->group_id = null;
+        }
+
+        $ability->save();
 
         return response()->json(['success' => true]);
     }
 
     /**
-     *
+     * @param $ability
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($ability)
     {
-        Ability::find($ability)->delete();
-        return response()->json($ability);
+        Ability::findOrFail($ability)->delete();
+
+        return response()->json(['success' => true]);
     }
 }

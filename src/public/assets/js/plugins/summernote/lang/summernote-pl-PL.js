@@ -1,4 +1,4 @@
-(function ($) {
+(function($) {
   $.extend($.summernote.lang, {
     'pl-PL': {
       font: {
@@ -9,6 +9,8 @@
         height: 'Interlinia',
         name: 'Czcionka',
         strikethrough: 'Przekreślenie',
+        subscript: 'Indeks dolny',
+        superscript: 'Indeks górny',
         size: 'Rozmiar'
       },
       image: {
@@ -30,7 +32,8 @@
         maximumFileSize: 'Limit wielkości pliku',
         maximumFileSizeError: 'Przekroczono limit wielkości pliku.',
         url: 'Adres URL grafiki',
-        remove: 'Usuń grafikę'
+        remove: 'Usuń grafikę',
+        original: 'Oryginał'
       },
       video: {
         video: 'Wideo',
@@ -49,13 +52,20 @@
         openInNewWindow: 'Otwórz w nowym oknie'
       },
       table: {
-        table: 'Tabela'
+        table: 'Tabela',
+        addRowAbove: 'Dodaj wiersz powyżej',
+        addRowBelow: 'Dodaj wiersz poniżej',
+        addColLeft: 'Dodaj kolumnę po lewej',
+        addColRight: 'Dodaj kolumnę po prawej',
+        delRow: 'Usuń wiersz',
+        delCol: 'Usuń kolumnę',
+        delTable: 'Usuń tabelę'
       },
       hr: {
         insert: 'Wstaw poziomą linię'
       },
       style: {
-        style: 'Style',
+        style: 'Styl',
         p: 'pny',
         blockquote: 'Cytat',
         pre: 'Kod',
@@ -91,7 +101,7 @@
         foreground: 'Czcionka',
         transparent: 'Przeźroczysty',
         setTransparent: 'Przeźroczyste',
-        reset: 'Reset',
+        reset: 'Zresetuj',
         resetToDefault: 'Domyślne'
       },
       shortcut: {
@@ -103,9 +113,42 @@
         documentStyle: 'Styl dokumentu',
         extraKeys: 'Dodatkowe klawisze'
       },
+      help: {
+        'insertParagraph': 'Wstaw paragraf',
+        'undo': 'Cofnij poprzednią operację',
+        'redo': 'Przywróć poprzednią operację',
+        'tab': 'Tabulacja',
+        'untab': 'Usuń tabulację',
+        'bold': 'Pogrubienie',
+        'italic': 'Kursywa',
+        'underline': 'Podkreślenie',
+        'strikethrough': 'Przekreślenie',
+        'removeFormat': 'Usuń formatowanie',
+        'justifyLeft': 'Wyrównaj do lewej',
+        'justifyCenter': 'Wyrównaj do środka',
+        'justifyRight': 'Wyrównaj do prawej',
+        'justifyFull': 'Justyfikacja',
+        'insertUnorderedList': 'Nienumerowana lista',
+        'insertOrderedList': 'Wypunktowana lista',
+        'outdent': 'Zmniejsz wcięcie paragrafu',
+        'indent': 'Zwiększ wcięcie paragrafu',
+        'formatPara': 'Zamień format bloku na paragraf (tag P)',
+        'formatH1': 'Zamień format bloku na H1',
+        'formatH2': 'Zamień format bloku na H2',
+        'formatH3': 'Zamień format bloku na H3',
+        'formatH4': 'Zamień format bloku na H4',
+        'formatH5': 'Zamień format bloku na H5',
+        'formatH6': 'Zamień format bloku na H6',
+        'insertHorizontalRule': 'Wstaw poziomą linię',
+        'linkDialog.show': 'Pokaż dialog linkowania'
+      },
       history: {
         undo: 'Cofnij',
         redo: 'Ponów'
+      },
+      specialChar: {
+        specialChar: 'ZNAKI SPECJALNE',
+        select: 'Wybierz Znak specjalny'
       }
     }
   });

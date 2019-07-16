@@ -321,8 +321,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RepositoryFactory", function() { return RepositoryFactory; });
 /* harmony import */ var _modelRepository__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modelRepository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/modelRepository.js");
 /* harmony import */ var _roleRepository__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./roleRepository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/roleRepository.js");
-/* harmony import */ var _permissionRepository__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./permissionRepository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/permissionRepository.js");
-/* harmony import */ var _routeRepository__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./routeRepository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/routeRepository.js");
+/* harmony import */ var _groupRepository__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./groupRepository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/groupRepository.js");
+/* harmony import */ var _permissionRepository__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./permissionRepository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/permissionRepository.js");
+/* harmony import */ var _routeRepository__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./routeRepository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/routeRepository.js");
+
 
 
 
@@ -330,14 +332,44 @@ __webpack_require__.r(__webpack_exports__);
 var repositories = {
   model: _modelRepository__WEBPACK_IMPORTED_MODULE_0__["default"],
   role: _roleRepository__WEBPACK_IMPORTED_MODULE_1__["default"],
-  permission: _permissionRepository__WEBPACK_IMPORTED_MODULE_2__["default"],
-  route: _routeRepository__WEBPACK_IMPORTED_MODULE_3__["default"]
+  group: _groupRepository__WEBPACK_IMPORTED_MODULE_2__["default"],
+  permission: _permissionRepository__WEBPACK_IMPORTED_MODULE_3__["default"],
+  route: _routeRepository__WEBPACK_IMPORTED_MODULE_4__["default"]
 };
 var RepositoryFactory = {
   get: function get(name) {
     return repositories[name];
   }
 };
+
+/***/ }),
+
+/***/ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/groupRepository.js":
+/*!******************************************************************************************************!*\
+  !*** ./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/groupRepository.js ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Repository__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Repository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/Repository.js");
+
+var resource = "/groups";
+/* harmony default export */ __webpack_exports__["default"] = ({
+  get: function get() {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].get("".concat(resource));
+  },
+  create: function create(payload) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(resource), payload);
+  },
+  update: function update(id, payload) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].patch("".concat(resource, "/").concat(id), payload);
+  },
+  "delete": function _delete(id) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("".concat(resource, "/").concat(id));
+  }
+});
 
 /***/ }),
 
@@ -375,7 +407,14 @@ __webpack_require__.r(__webpack_exports__);
 var resource = "/permissions";
 /* harmony default export */ __webpack_exports__["default"] = ({
   get: function get() {
-    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].get("".concat(resource));
+    var group_by = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    var uri = "".concat(resource);
+
+    if (group_by) {
+      uri = "".concat(resource, "?group_by_group=1");
+    }
+
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].get(uri);
   },
   create: function create(payload) {
     return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(resource), payload);
@@ -406,17 +445,20 @@ var resource = "/roles";
   get: function get() {
     return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].get("".concat(resource));
   },
-  createRole: function createRole(payload) {
+  create: function create(payload) {
     return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(resource), payload);
+  },
+  update: function update(id, payload) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].patch("".concat(resource, "/").concat(id), payload);
+  },
+  "delete": function _delete(id) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("".concat(resource, "/").concat(id));
   },
   assignPermission: function assignPermission(payload) {
     return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(resource), payload);
   },
   unassignPermission: function unassignPermission(payload) {
     return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(resource), payload);
-  },
-  removeRole: function removeRole(roleId) {
-    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("".concat(resource, "/").concat(roleId));
   }
 });
 

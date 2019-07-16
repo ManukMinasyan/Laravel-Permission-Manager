@@ -1,4 +1,4 @@
-(function ($) {
+(function($) {
   $.extend($.summernote.lang, {
     'fr-FR': {
       font: {
@@ -22,7 +22,7 @@
         floatLeft: 'Aligné à gauche',
         floatRight: 'Aligné à droite',
         floatNone: 'Pas d\'alignement',
-        shapeRounded: 'Forme: Rectangle arrondie',
+        shapeRounded: 'Forme: Rectangle arrondi',
         shapeCircle: 'Forme: Cercle',
         shapeThumbnail: 'Forme: Vignette',
         shapeNone: 'Forme: Aucune',
@@ -32,7 +32,8 @@
         maximumFileSize: 'Taille de fichier maximale',
         maximumFileSizeError: 'Taille maximale du fichier dépassée',
         url: 'URL de l\'image',
-        remove: 'Supprimer l\'image'
+        remove: 'Supprimer l\'image',
+        original: 'Original'
       },
       video: {
         video: 'Vidéo',

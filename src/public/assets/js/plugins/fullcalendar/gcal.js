@@ -1,7 +1,7 @@
 /*!
- * FullCalendar v3.8.0
+ * FullCalendar v3.9.0
  * Docs & License: https://fullcalendar.io/
- * (c) 2017 Adam Shaw
+ * (c) 2018 Adam Shaw
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -75,7 +75,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 261);
+/******/ 	return __webpack_require__(__webpack_require__.s = 266);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -110,19 +110,19 @@ exports.__extends = function (d, b) {
 
 /***/ }),
 
-/***/ 261:
+/***/ 266:
 /***/ (function(module, exports, __webpack_require__) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var exportHooks = __webpack_require__(1);
-var GcalEventSource_1 = __webpack_require__(262);
+var GcalEventSource_1 = __webpack_require__(267);
 exportHooks.EventSourceParser.registerClass(GcalEventSource_1.default);
 exportHooks.GcalEventSource = GcalEventSource_1.default;
 
 
 /***/ }),
 
-/***/ 262:
+/***/ 267:
 /***/ (function(module, exports, __webpack_require__) {
 
 Object.defineProperty(exports, "__esModule", { value: true });

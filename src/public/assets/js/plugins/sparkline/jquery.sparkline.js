@@ -2,7 +2,7 @@
 *
 * jquery.sparkline.js
 *
-* v2.1.2
+* v2.4.1
 * (c) Splunk, Inc
 * Contact: Gareth Watts (gareth@splunk.com)
 * http://omnipotent.net/jquery.sparkline/
@@ -63,14 +63,14 @@
 *   <p>Sparkline: <span class="sparkline">1:1,2.7:4,3.4:6,5:6,6:8,8.7:5,9:3,10:5</span></p>
 *    $('#sparkline1').sparkline([ [1,1], [2.7,4], [3.4,6], [5,6], [6,8], [8.7,5], [9,3], [10,5] ])
 *
-* By default, options should be passed in as teh second argument to the sparkline function:
+* By default, options should be passed in as the second argument to the sparkline function:
 *   $('.sparkline').sparkline([1,2,3,4], {type: 'bar'})
 *
 * Options can also be set by passing them on the tag itself.  This feature is disabled by default though
 * as there's a slight performance overhead:
 *   $('.sparkline').sparkline([1,2,3,4], {enableTagOptions: true})
 *   <p>Sparkline: <span class="sparkline" sparkType="bar" sparkBarColor="red">loading</span></p>
-* Prefix all options supplied as tag attribute with "spark" (configurable by setting tagOptionPrefix)
+* Prefix all options supplied as tag attribute with "spark" (configurable by setting tagOptionsPrefix)
 *
 * Supported options:
 *   lineColor - Color of the line used for the chart
@@ -87,7 +87,7 @@
 *           existing chart is detected.
 *   tagValuesAttribute - Name of tag attribute to check for data values - Defaults to 'values'
 *   enableTagOptions - Whether to check tags for sparkline options
-*   tagOptionPrefix - Prefix used for options supplied as tag attributes - Defaults to 'spark'
+*   tagOptionsPrefix - Prefix used for options supplied as tag attributes - Defaults to 'spark'
 *   disableHiddenCheck - If set to true, then the plugin will assume that charts will never be drawn into a
 *           hidden dom element, avoding a browser reflow
 *   disableInteraction - If set to true then all mouseover/click interaction behaviour will be disabled,
@@ -367,6 +367,7 @@
             'white-space: nowrap;' +
             'padding: 5px;' +
             'border: 1px solid white;' +
+            'box-sizing: content-box;' +
             'z-index: 10000;' +
             '}' +
             '.jqsfield { ' +
@@ -579,14 +580,22 @@
 
     // http://paulirish.com/2008/bookmarklet-inject-new-css-rules/
     addCSS = function(css) {
-        var tag;
-        //if ('\v' == 'v') /* ie only */ {
+        var tag, iefail;
         if (document.createStyleSheet) {
-            document.createStyleSheet().cssText = css;
+            try {
+                document.createStyleSheet().cssText = css;
+                return;
+            } catch (e) {
+                // IE <= 9 maxes out at 31 stylesheets; inject into page instead.
+                iefail = true;
+            }
+        }
+        tag = document.createElement('style');
+        tag.type = 'text/css';
+        document.getElementsByTagName('head')[0].appendChild(tag);
+        if (iefail) {
+            document.styleSheets[document.styleSheets.length - 1].cssText = css;
         } else {
-            tag = document.createElement('style');
-            tag.type = 'text/css';
-            document.getElementsByTagName('head')[0].appendChild(tag);
             tag[(typeof document.body.style.WebkitAppearance == 'string') /* webkit only */ ? 'innerText' : 'innerHTML'] = css;
         }
     };
@@ -2340,6 +2349,7 @@
                 options = this.options,
                 radius = this.radius,
                 borderWidth = options.get('borderWidth'),
+                donutWidth = options.get('donutWidth'),
                 shape, i;
 
             if (!pie._super.render.call(this)) {
@@ -2355,6 +2365,10 @@
                     this.valueShapes[i] = shape.id; // store just the shapeid
                     this.shapes[shape.id] = i;
                 }
+            }
+            if (donutWidth) {
+                target.drawCircle(radius, radius, radius - donutWidth, options.get('donutColor'), 
+                    options.get('donutColor'), 0).append();
             }
             target.render();
         }

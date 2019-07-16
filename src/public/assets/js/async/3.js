@@ -88,15 +88,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 var RoleRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__["RepositoryFactory"].get('role');
+var GroupRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__["RepositoryFactory"].get('group');
 var PermissionRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__["RepositoryFactory"].get('permission');
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddPermissionComponent",
   data: function data() {
     return {
       roles: [],
+      groups: [],
       permission: {},
       error: ''
     };
@@ -106,6 +110,7 @@ var PermissionRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MOD
   },
   created: function created() {
     this.getRoles();
+    this.getGroups();
   },
   methods: {
     getRoles: function () {
@@ -138,7 +143,37 @@ var PermissionRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MOD
 
       return getRoles;
     }(),
-    addNewPermission: function addNewPermission(e) {
+    getGroups: function () {
+      var _getGroups = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return GroupRepository.get();
+
+              case 2:
+                res = _context2.sent;
+                this.groups = res.data;
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function getGroups() {
+        return _getGroups.apply(this, arguments);
+      }
+
+      return getGroups;
+    }(),
+    storePermission: function storePermission(e) {
       e.preventDefault();
       var vm = this;
       vm.error = '';
@@ -148,12 +183,6 @@ var PermissionRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MOD
         var errors = error.response.data.errors;
         vm.error = errors[Object.keys(errors)[0]][0];
       });
-    },
-    deletePermission: function deletePermission(id) {
-      PermissionRepository["delete"](id);
-    },
-    closeModal: function closeModal() {
-      this.$parent.showPermissions = !this.$parent.showPermissions;
     }
   }
 });
@@ -200,33 +229,7 @@ var render = function() {
               "div",
               { staticClass: "block block-themed block-transparent mb-0" },
               [
-                _c("div", { staticClass: "block-header bg-primary-dark" }, [
-                  _c("h3", { staticClass: "block-title" }, [
-                    _vm._v(
-                      "\n                        Add new permission\n                    "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "block-options" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn-block-option",
-                        attrs: {
-                          type: "button",
-                          "data-dismiss": "modal",
-                          "aria-label": "Close"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.closeModal()
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "si si-close" })]
-                    )
-                  ])
-                ]),
+                _vm._m(0),
                 _vm._v(" "),
                 _c("div", { staticClass: "block-content tab-content" }, [
                   _c(
@@ -240,7 +243,7 @@ var render = function() {
                         "form",
                         {
                           attrs: { method: "post" },
-                          on: { submit: _vm.addNewPermission }
+                          on: { submit: _vm.storePermission }
                         },
                         [
                           _c("div", { staticClass: "form-group row" }, [
@@ -363,15 +366,15 @@ var render = function() {
                                   _c("v-select", {
                                     attrs: {
                                       id: "inputGroup",
-                                      options: _vm.roles,
-                                      label: "title"
+                                      options: _vm.groups,
+                                      label: "name"
                                     },
                                     model: {
-                                      value: _vm.permission.roles,
+                                      value: _vm.permission.group,
                                       callback: function($$v) {
-                                        _vm.$set(_vm.permission, "roles", $$v)
+                                        _vm.$set(_vm.permission, "group", $$v)
                                       },
-                                      expression: "permission.roles"
+                                      expression: "permission.group"
                                     }
                                   }),
                                   _vm._v(" "),
@@ -386,7 +389,7 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _vm._m(0)
+                          _vm._m(1)
                         ]
                       )
                     ]
@@ -416,6 +419,33 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "block-header bg-primary-dark" }, [
+      _c("h3", { staticClass: "block-title" }, [
+        _vm._v(
+          "\n                        Add new permission\n                    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "block-options" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn-block-option",
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              "aria-label": "Close"
+            }
+          },
+          [_c("i", { staticClass: "si si-close" })]
+        )
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -538,8 +568,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RepositoryFactory", function() { return RepositoryFactory; });
 /* harmony import */ var _modelRepository__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modelRepository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/modelRepository.js");
 /* harmony import */ var _roleRepository__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./roleRepository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/roleRepository.js");
-/* harmony import */ var _permissionRepository__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./permissionRepository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/permissionRepository.js");
-/* harmony import */ var _routeRepository__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./routeRepository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/routeRepository.js");
+/* harmony import */ var _groupRepository__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./groupRepository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/groupRepository.js");
+/* harmony import */ var _permissionRepository__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./permissionRepository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/permissionRepository.js");
+/* harmony import */ var _routeRepository__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./routeRepository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/routeRepository.js");
+
 
 
 
@@ -547,14 +579,44 @@ __webpack_require__.r(__webpack_exports__);
 var repositories = {
   model: _modelRepository__WEBPACK_IMPORTED_MODULE_0__["default"],
   role: _roleRepository__WEBPACK_IMPORTED_MODULE_1__["default"],
-  permission: _permissionRepository__WEBPACK_IMPORTED_MODULE_2__["default"],
-  route: _routeRepository__WEBPACK_IMPORTED_MODULE_3__["default"]
+  group: _groupRepository__WEBPACK_IMPORTED_MODULE_2__["default"],
+  permission: _permissionRepository__WEBPACK_IMPORTED_MODULE_3__["default"],
+  route: _routeRepository__WEBPACK_IMPORTED_MODULE_4__["default"]
 };
 var RepositoryFactory = {
   get: function get(name) {
     return repositories[name];
   }
 };
+
+/***/ }),
+
+/***/ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/groupRepository.js":
+/*!******************************************************************************************************!*\
+  !*** ./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/groupRepository.js ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Repository__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Repository */ "./resources/packages/ManukMinasyan/LaravelPermissionManager/js/repositories/Repository.js");
+
+var resource = "/groups";
+/* harmony default export */ __webpack_exports__["default"] = ({
+  get: function get() {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].get("".concat(resource));
+  },
+  create: function create(payload) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(resource), payload);
+  },
+  update: function update(id, payload) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].patch("".concat(resource, "/").concat(id), payload);
+  },
+  "delete": function _delete(id) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("".concat(resource, "/").concat(id));
+  }
+});
 
 /***/ }),
 
@@ -592,7 +654,14 @@ __webpack_require__.r(__webpack_exports__);
 var resource = "/permissions";
 /* harmony default export */ __webpack_exports__["default"] = ({
   get: function get() {
-    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].get("".concat(resource));
+    var group_by = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    var uri = "".concat(resource);
+
+    if (group_by) {
+      uri = "".concat(resource, "?group_by_group=1");
+    }
+
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].get(uri);
   },
   create: function create(payload) {
     return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(resource), payload);
@@ -623,17 +692,20 @@ var resource = "/roles";
   get: function get() {
     return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].get("".concat(resource));
   },
-  createRole: function createRole(payload) {
+  create: function create(payload) {
     return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(resource), payload);
+  },
+  update: function update(id, payload) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].patch("".concat(resource, "/").concat(id), payload);
+  },
+  "delete": function _delete(id) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("".concat(resource, "/").concat(id));
   },
   assignPermission: function assignPermission(payload) {
     return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(resource), payload);
   },
   unassignPermission: function unassignPermission(payload) {
     return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(resource), payload);
-  },
-  removeRole: function removeRole(roleId) {
-    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("".concat(resource, "/").concat(roleId));
   }
 });
 

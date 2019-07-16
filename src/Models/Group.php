@@ -8,11 +8,22 @@
 
 namespace ManukMinasyan\LaravelPermissionManager\Models;
 
-use \Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as LaravelModel;
 
-class Group extends Model
+class Group extends LaravelModel
 {
+    protected $table;
+
     protected $fillable = [
         'name', 'comment'
     ];
+
+    /**
+     * Model constructor.
+     */
+    public function __construct()
+    {
+        $this->table = config('laravel-permission-manager.database.group_table');
+        parent::__construct();
+    }
 }
