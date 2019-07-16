@@ -33,7 +33,7 @@ class PermissionsController extends Controller
         if($request->has('group_by_group')){
             $abilities = $abilities->groupBy('group.name')->sort()->reverse();
         }
-        
+
         return response()->json($abilities);
     }
 
