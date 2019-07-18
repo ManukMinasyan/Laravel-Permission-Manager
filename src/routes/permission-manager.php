@@ -28,9 +28,9 @@ Route::group([
     Route::resource('groups', 'GroupsController');
     Route::resource('permissions', 'PermissionsController');
 
-    Route::group(['prefix' => 'routes', 'as' => 'routes.'], function () {
-        Route::get('/', 'RoutesController@get');
-    });
+    Route::get('/routes/activated', 'RoutesController@getActivated');
+    Route::post('/routes/detach-ability', 'RoutesController@detachAbility');
+    Route::resource('routes', 'RoutesController');
 
     Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
         Route::get('/', 'UsersController@index');

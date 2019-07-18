@@ -529,6 +529,18 @@ var resource = "/routes";
 /* harmony default export */ __webpack_exports__["default"] = ({
   get: function get() {
     return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].get("".concat(resource));
+  },
+  getActivated: function getActivated() {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].get("".concat(resource, "/activated"));
+  },
+  detachAbility: function detachAbility(payload) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(resource, "/detach-ability"), payload);
+  },
+  create: function create(payload) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(resource), payload);
+  },
+  update: function update(id, payload) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].patch("".concat(resource, "/").concat(id), payload);
   }
 });
 

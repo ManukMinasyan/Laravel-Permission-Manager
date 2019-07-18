@@ -88,12 +88,12 @@ var RouteRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1
   data: function data() {
     return {
       routes: [],
-      currentRoute: {},
-      showedEditPermissions: false
+      currentRoute: {}
     };
   },
   created: function created() {
     this.getRoutes();
+    this.getAcitvatedRoutes();
   },
   methods: {
     getRoutes: function () {
@@ -130,9 +130,42 @@ var RouteRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1
 
       return getRoutes;
     }(),
-    showEditPermissions: function showEditPermissions(route) {
+    getAcitvatedRoutes: function () {
+      var _getAcitvatedRoutes = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _ref2, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                this.isLoading = true;
+                _context2.next = 3;
+                return RouteRepository.getActivated();
+
+              case 3:
+                _ref2 = _context2.sent;
+                data = _ref2.data;
+                this.isLoading = false;
+                this.activatedRoutes = data;
+
+              case 7:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function getAcitvatedRoutes() {
+        return _getAcitvatedRoutes.apply(this, arguments);
+      }
+
+      return getAcitvatedRoutes;
+    }(),
+    setCurrentRoute: function setCurrentRoute(route) {
       this.currentRoute = route;
-      this.showedEditPermissions = true;
     }
   }
 });
@@ -371,7 +404,7 @@ var render = function() {
                                     },
                                     on: {
                                       click: function($event) {
-                                        return _vm.showEditPermissions(route)
+                                        return _vm.setCurrentRoute(route)
                                       }
                                     }
                                   },
@@ -424,11 +457,9 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm.showedEditPermissions
-        ? _c("edit-permissions-component", {
-            attrs: { "current-route": _vm.currentRoute }
-          })
-        : _vm._e()
+      _c("edit-permissions-component", {
+        attrs: { "current-route": _vm.currentRoute }
+      })
     ],
     1
   )

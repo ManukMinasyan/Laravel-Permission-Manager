@@ -112,8 +112,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
-var RoleRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__["RepositoryFactory"].get('role');
+var RouteRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__["RepositoryFactory"].get('route');
 var PermissionRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MODULE_1__["RepositoryFactory"].get('permission');
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -124,15 +125,7 @@ var PermissionRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MOD
   },
   data: function data() {
     return {
-      roleTag: '',
-      roleTags: [],
-      roles: [],
-      routeRoles: [],
-      routeAbilities: [],
-      permission: {},
       permissions: [],
-      autocompleteRoles: [],
-      showAddEditPermission: false,
       error: '',
       over: false
     };
@@ -141,21 +134,11 @@ var PermissionRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MOD
     currentRoute: {}
   },
   created: function created() {
-    this.getAllRoles();
     this.getAllPermissions();
   },
-  computed: {
-    filteredItems: function filteredItems() {
-      var _this = this;
-
-      return this.autocompleteRoles.filter(function (i) {
-        return i.text.toLowerCase().indexOf(_this.roleTag.toLowerCase()) !== -1;
-      });
-    }
-  },
   methods: {
-    getAllRoles: function () {
-      var _getAllRoles = _asyncToGenerator(
+    getAllPermissions: function () {
+      var _getAllPermissions = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var res;
@@ -164,11 +147,11 @@ var PermissionRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MOD
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return RoleRepository.get();
+                return PermissionRepository.get(true);
 
               case 2:
                 res = _context.sent;
-                this.roles = res.data;
+                this.permissions = res.data;
 
               case 4:
               case "end":
@@ -178,36 +161,6 @@ var PermissionRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MOD
         }, _callee, this);
       }));
 
-      function getAllRoles() {
-        return _getAllRoles.apply(this, arguments);
-      }
-
-      return getAllRoles;
-    }(),
-    getAllPermissions: function () {
-      var _getAllPermissions = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return PermissionRepository.get(true);
-
-              case 2:
-                res = _context2.sent;
-                this.permissions = res.data;
-
-              case 4:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
       function getAllPermissions() {
         return _getAllPermissions.apply(this, arguments);
       }
@@ -215,13 +168,39 @@ var PermissionRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MOD
       return getAllPermissions;
     }(),
     handleDrop: function handleDrop(data) {
+      var vm = this;
       this.over = false;
 
-      if ('abilities' in data) {
-        this.routeAbilities = this.routeAbilities.concat(data.abilities);
+      if (Array.isArray(data)) {
+        data.forEach(function (ability) {
+          var key = vm.currentRoute.abilities.findIndex(function (item) {
+            return item.name === ability.name;
+          });
+
+          if (key === -1) {
+            vm.currentRoute.abilities = vm.currentRoute.abilities.concat(ability);
+          }
+        });
       } else {
-        this.routeAbilities.push(data);
+        var key = vm.currentRoute.abilities.findIndex(function (item) {
+          return item.name === data.name;
+        });
+        console.log(key);
+
+        if (key === -1) {
+          vm.currentRoute.abilities = vm.currentRoute.abilities.concat(data);
+        }
       }
+
+      RouteRepository.create(vm.currentRoute);
+    },
+    detachAbility: function detachAbility(ability, key) {
+      var data = {
+        route: this.currentRoute,
+        ability: ability
+      };
+      RouteRepository.detachAbility(data);
+      this.currentRoute.abilities.splice(key, 1);
     },
     closeModal: function closeModal() {
       this.$parent.showPermissions = !this.$parent.showPermissions;
@@ -243,7 +222,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../../../node_
 
 
 // module
-exports.push([module.i, ".program-modal[data-v-3ff8956a] {\n  width: 100%;\n}\n.program-modal .content[data-v-3ff8956a] {\n  position: relative;\n  border-bottom: 0;\n  width: 100%;\n}\n.program-modal .content h3[data-v-3ff8956a] {\n  position: relative;\n  display: block;\n  font-size: 18px;\n  height: 30px;\n}\n.program-modal .content .table-content[data-v-3ff8956a] {\n  height: 350px;\n}\n.program-modal .content table[data-v-3ff8956a] {\n  font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n  border-collapse: collapse;\n  width: 100%;\n  height: 100%;\n  margin-top: 10px;\n}\n.program-modal .content table tbody[data-v-3ff8956a] {\n  width: 100%;\n  height: 100%;\n  display: inline-flex;\n  overflow-y: auto;\n}\n.program-modal .content table tbody[data-v-3ff8956a]::-webkit-scrollbar {\n  width: 8px;\n  position: relative;\n  left: 10px;\n}\n.program-modal .content table tbody[data-v-3ff8956a]::-webkit-scrollbar-thumb {\n  background: #F2F2F3;\n  border-radius: 5px;\n}\n.program-modal .content table tbody tr[data-v-3ff8956a] {\n  display: flex;\n  flex-flow: row wrap;\n  height: 50px;\n  flex: 1;\n}\n.program-modal .content table thead tr[data-v-3ff8956a] {\n  display: flex;\n}\n.program-modal .content table thead tr th[data-v-3ff8956a] {\n  flex: 1;\n}\n.program-modal .content table thead tr th .program-container[data-v-3ff8956a] {\n  margin: 15px 25px;\n}\n.program-modal .content table tr[data-v-3ff8956a] {\n  display: block;\n}\n.program-modal .content table tr td[data-v-3ff8956a], .program-modal .content table tr th[data-v-3ff8956a] {\n  font-size: 13px;\n  display: inline-block;\n  padding: 8px;\n  margin-right: 13px;\n}\n.program-modal .content table tr td .program-container[data-v-3ff8956a], .program-modal .content table tr th .program-container[data-v-3ff8956a] {\n  display: block;\n  position: relative;\n  padding-left: 15px;\n  margin: 15px 36px 15px 0;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  /* Hide the browser's default checkbox */\n  /* Create a custom checkbox */\n  /* On mouse-over, add a grey background color */\n}\n.program-modal .content table tr td .program-container.ability[data-v-3ff8956a], .program-modal .content table tr th .program-container.ability[data-v-3ff8956a] {\n  margin: 0 60px 0 15px;\n}\n.program-modal .content table tr td .program-container input[data-v-3ff8956a], .program-modal .content table tr th .program-container input[data-v-3ff8956a] {\n  position: absolute;\n  cursor: pointer;\n  opacity: 0;\n  /* When the checkbox is checked, add a blue background */\n  /* Show the checkmark when checked */\n}\n.program-modal .content table tr td .program-container input:checked ~ .checkmark[data-v-3ff8956a], .program-modal .content table tr th .program-container input:checked ~ .checkmark[data-v-3ff8956a] {\n  background-color: #1D86BF;\n}\n.program-modal .content table tr td .program-container input:checked ~ .checkmark[data-v-3ff8956a]:after, .program-modal .content table tr th .program-container input:checked ~ .checkmark[data-v-3ff8956a]:after {\n  display: block;\n}\n.program-modal .content table tr td .program-container .checkmark[data-v-3ff8956a], .program-modal .content table tr th .program-container .checkmark[data-v-3ff8956a] {\n  position: absolute;\n  top: 2px;\n  left: 0;\n  height: 16px;\n  width: 16px;\n  background-color: #F5F6FA;\n  border-radius: 3px;\n  /* Create the checkmark/indicator (hidden when not checked) */\n}\n.program-modal .content table tr td .program-container .checkmark[data-v-3ff8956a]:after, .program-modal .content table tr th .program-container .checkmark[data-v-3ff8956a]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n  left: 6px;\n  top: 2px;\n  width: 5px;\n  height: 9px;\n  border: solid white;\n  border-width: 0 2px 2px 0;\n  transform: rotate(45deg);\n  -ms-transform: rotate(45deg);\n  -webkit-transform: rotate(45deg);\n}\n.program-modal .content table tr td .program-container:hover input ~ .checkmark[data-v-3ff8956a], .program-modal .content table tr th .program-container:hover input ~ .checkmark[data-v-3ff8956a] {\n  background-color: #ccc;\n}\n.program-modal .content table tr td.parent[data-v-3ff8956a] {\n  font-weight: bold;\n  padding: 0;\n  text-align: left;\n  background-color: #F5F6FA;\n}\n.program-modal .content table tr td.parent .program-container .checkmark[data-v-3ff8956a] {\n  background-color: #fff;\n}\n.program-modal .content table tr td[data-v-3ff8956a] {\n  width: 100%;\n  border-bottom: 1px solid #ddd;\n  background: #FFFFFF;\n}", ""]);
+exports.push([module.i, ".program-modal[data-v-3ff8956a] {\n  width: 100%;\n}\n.program-modal .content[data-v-3ff8956a] {\n  position: relative;\n  border-bottom: 0;\n  width: 100%;\n}\n.program-modal .content h3[data-v-3ff8956a] {\n  position: relative;\n  display: block;\n  font-size: 18px;\n  height: 30px;\n}\n.program-modal .content .table-content[data-v-3ff8956a] {\n  height: 350px;\n}\n.program-modal .content table[data-v-3ff8956a] {\n  font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n  border-collapse: collapse;\n  width: 100%;\n  height: 100%;\n}\n.program-modal .content table tbody[data-v-3ff8956a] {\n  width: 100%;\n  height: 100%;\n  display: inline-flex;\n  overflow-y: auto;\n}\n.program-modal .content table tbody[data-v-3ff8956a]::-webkit-scrollbar {\n  width: 8px;\n  position: relative;\n  left: 10px;\n}\n.program-modal .content table tbody[data-v-3ff8956a]::-webkit-scrollbar-thumb {\n  background: #F2F2F3;\n  border-radius: 5px;\n}\n.program-modal .content table tbody tr[data-v-3ff8956a] {\n  display: flex;\n  flex-flow: row wrap;\n  height: 50px;\n  flex: 1;\n}\n.program-modal .content table thead tr[data-v-3ff8956a] {\n  display: flex;\n}\n.program-modal .content table thead tr th[data-v-3ff8956a] {\n  flex: 1;\n}\n.program-modal .content table thead tr th .program-container[data-v-3ff8956a] {\n  margin: 15px 25px;\n}\n.program-modal .content table tr[data-v-3ff8956a] {\n  display: block;\n}\n.program-modal .content table tr td[data-v-3ff8956a], .program-modal .content table tr th[data-v-3ff8956a] {\n  font-size: 13px;\n  display: inline-block;\n  padding: 8px;\n  margin-right: 13px;\n}\n.program-modal .content table tr td .program-container[data-v-3ff8956a], .program-modal .content table tr th .program-container[data-v-3ff8956a] {\n  display: block;\n  position: relative;\n  padding-left: 15px;\n  margin: 15px 36px 15px 0;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  /* Hide the browser's default checkbox */\n  /* Create a custom checkbox */\n  /* On mouse-over, add a grey background color */\n}\n.program-modal .content table tr td .program-container.ability[data-v-3ff8956a], .program-modal .content table tr th .program-container.ability[data-v-3ff8956a] {\n  margin: 0 60px 0 15px;\n}\n.program-modal .content table tr td .program-container input[data-v-3ff8956a], .program-modal .content table tr th .program-container input[data-v-3ff8956a] {\n  position: absolute;\n  cursor: pointer;\n  opacity: 0;\n  /* When the checkbox is checked, add a blue background */\n  /* Show the checkmark when checked */\n}\n.program-modal .content table tr td .program-container input:checked ~ .checkmark[data-v-3ff8956a], .program-modal .content table tr th .program-container input:checked ~ .checkmark[data-v-3ff8956a] {\n  background-color: #1D86BF;\n}\n.program-modal .content table tr td .program-container input:checked ~ .checkmark[data-v-3ff8956a]:after, .program-modal .content table tr th .program-container input:checked ~ .checkmark[data-v-3ff8956a]:after {\n  display: block;\n}\n.program-modal .content table tr td .program-container .checkmark[data-v-3ff8956a], .program-modal .content table tr th .program-container .checkmark[data-v-3ff8956a] {\n  position: absolute;\n  top: 2px;\n  left: 0;\n  height: 16px;\n  width: 16px;\n  background-color: #F5F6FA;\n  border-radius: 3px;\n  /* Create the checkmark/indicator (hidden when not checked) */\n}\n.program-modal .content table tr td .program-container .checkmark[data-v-3ff8956a]:after, .program-modal .content table tr th .program-container .checkmark[data-v-3ff8956a]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n  left: 6px;\n  top: 2px;\n  width: 5px;\n  height: 9px;\n  border: solid white;\n  border-width: 0 2px 2px 0;\n  transform: rotate(45deg);\n  -ms-transform: rotate(45deg);\n  -webkit-transform: rotate(45deg);\n}\n.program-modal .content table tr td .program-container:hover input ~ .checkmark[data-v-3ff8956a], .program-modal .content table tr th .program-container:hover input ~ .checkmark[data-v-3ff8956a] {\n  background-color: #ccc;\n}\n.program-modal .content table tr td.parent[data-v-3ff8956a] {\n  font-weight: bold;\n  padding: 0;\n  text-align: left;\n  background-color: #F5F6FA;\n}\n.program-modal .content table tr td.parent .program-container .checkmark[data-v-3ff8956a] {\n  background-color: #fff;\n}\n.program-modal .content table tr td[data-v-3ff8956a] {\n  width: 100%;\n  border-bottom: 1px solid #ddd;\n  background: #FFFFFF;\n}\n.drop-section[data-v-3ff8956a] {\n  min-height: 100px;\n  height: 100%;\n}", ""]);
 
 // exports
 
@@ -375,7 +354,7 @@ var render = function() {
                                               staticClass: "drag parent",
                                               attrs: {
                                                 tag: "td",
-                                                transferData: _vm.role
+                                                transferData: permission_g
                                               }
                                             },
                                             [
@@ -460,13 +439,8 @@ var render = function() {
                                 _c(
                                   "drop",
                                   {
-                                    staticClass: "drop",
+                                    staticClass: "drop drop-section",
                                     class: { over: _vm.over },
-                                    staticStyle: {
-                                      border: "1px solid",
-                                      "min-height": "100px",
-                                      height: "100%"
-                                    },
                                     on: {
                                       dragover: function($event) {
                                         _vm.over = true
@@ -483,41 +457,66 @@ var render = function() {
                                         _c(
                                           "tr",
                                           [
-                                            _vm._l(_vm.routeAbilities, function(
-                                              ability,
-                                              parent_key
-                                            ) {
-                                              return [
-                                                _c(
-                                                  "td",
-                                                  { staticClass: "parent" },
-                                                  [
-                                                    _c(
-                                                      "label",
-                                                      {
-                                                        staticClass:
-                                                          "program-container"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "span",
-                                                          {
-                                                            staticClass: "name"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              _vm._s(
-                                                                ability.name
+                                            _vm._l(
+                                              _vm.currentRoute.abilities,
+                                              function(ability, parent_key) {
+                                                return [
+                                                  _c(
+                                                    "td",
+                                                    { staticClass: "parent" },
+                                                    [
+                                                      _c(
+                                                        "label",
+                                                        {
+                                                          staticClass:
+                                                            "program-container"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "span",
+                                                            {
+                                                              staticClass:
+                                                                "name"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  ability.name
+                                                                )
                                                               )
-                                                            )
-                                                          ]
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            })
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "button",
+                                                            {
+                                                              staticClass:
+                                                                "btn btn-sm pull-right",
+                                                              on: {
+                                                                click: function(
+                                                                  $event
+                                                                ) {
+                                                                  return _vm.detachAbility(
+                                                                    ability,
+                                                                    parent_key
+                                                                  )
+                                                                }
+                                                              }
+                                                            },
+                                                            [
+                                                              _c("i", {
+                                                                staticClass:
+                                                                  "fa fa-remove text-danger"
+                                                              })
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              }
+                                            )
                                           ],
                                           2
                                         )
@@ -841,6 +840,18 @@ var resource = "/routes";
 /* harmony default export */ __webpack_exports__["default"] = ({
   get: function get() {
     return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].get("".concat(resource));
+  },
+  getActivated: function getActivated() {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].get("".concat(resource, "/activated"));
+  },
+  detachAbility: function detachAbility(payload) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(resource, "/detach-ability"), payload);
+  },
+  create: function create(payload) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(resource), payload);
+  },
+  update: function update(id, payload) {
+    return _Repository__WEBPACK_IMPORTED_MODULE_0__["default"].patch("".concat(resource, "/").concat(id), payload);
   }
 });
 
