@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "vendor/ManukMinasyan/LaravelPermissionManager/js/async/" + ({}[chunkId]||chunkId) + ".js?" + {"0":"a4b8a42afc49a938edad","1":"56b074c4430aca8292a3","2":"1c0b9ceb56561792702c","3":"fd36db28e17bd4aff3de","4":"b485ea80ad45b6971d63","5":"fd8bb933cf1aab79aebd","6":"231f7bf6c02e256e8448","7":"4612dbe70c3e82c10a71","8":"642e892ba18448a08bb2","9":"15bcb140acbc73b7448f","10":"9d666e04fe9ec81be910"}[chunkId] + ""
+/******/ 		return __webpack_require__.p + "vendor/ManukMinasyan/LaravelPermissionManager/js/async/" + ({}[chunkId]||chunkId) + ".js?" + {"0":"4d810b2d4566526d82ed","2":"ca4bb81d27402af4365b","3":"2cd04ca1f13bb49133d4","4":"b485ea80ad45b6971d63","5":"fd8bb933cf1aab79aebd","6":"30c615fd987895125223","7":"aea4cb93d82b72d12754","8":"7ad0ef7b2622a449f571","9":"74b3dae222e177f71c85","10":"9d666e04fe9ec81be910","11":"e84afc8ebef06da7cb6d"}[chunkId] + ""
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -52883,7 +52883,7 @@ var map = {
 	],
 	"./pages/Model/ModelsComponent.vue": [
 		"./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Model/ModelsComponent.vue",
-		0,
+		11,
 		7
 	],
 	"./pages/Role/AddGroupComponent.vue": [
@@ -52892,7 +52892,7 @@ var map = {
 	],
 	"./pages/Role/AddPermissionComponent.vue": [
 		"./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/AddPermissionComponent.vue",
-		0,
+		11,
 		4,
 		3
 	],
@@ -52902,22 +52902,22 @@ var map = {
 	],
 	"./pages/Role/RolesPermissionsComponent.vue": [
 		"./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Role/RolesPermissionsComponent.vue",
+		11,
 		0,
-		1,
 		4,
 		3,
 		5
 	],
 	"./pages/Route/EditPermissionsComponent.vue": [
 		"./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Route/EditPermissionsComponent.vue",
+		11,
 		0,
-		1,
 		2
 	],
 	"./pages/Route/RoutesComponent.vue": [
 		"./resources/packages/ManukMinasyan/LaravelPermissionManager/js/components/pages/Route/RoutesComponent.vue",
+		11,
 		0,
-		1,
 		2,
 		6
 	]

@@ -12,17 +12,32 @@ use Illuminate\Database\Eloquent\Model as LaravelModel;
 
 class Route extends LaravelModel
 {
+    /**
+     * @var \Illuminate\Config\Repository|mixed
+     */
     protected $table;
 
     /**
-     * Model constructor.
+     * @var array
      */
-    public function __construct()
+    protected $fillable = [
+        'action_method'
+    ];
+
+    /**
+     * Route constructor.
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
     {
         $this->table = config('laravel-permission-manager.database.route_table');
-        parent::__construct();
+
+        parent::__construct($attributes);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function abilities()
     {
         return $this->belongsToMany(Ability::class, config('laravel-permission-manager.database.route_permission_table'));

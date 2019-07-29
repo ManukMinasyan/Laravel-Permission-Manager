@@ -3,7 +3,7 @@
 
         <div class="block">
             <tabs-component>
-                <tab-component  name="All routes" :selected="true">
+                <tab-component name="All routes" :selected="true">
                     <table class="table table-striped table-vcenter">
                         <thead>
                         <tr>
@@ -24,7 +24,7 @@
                                 <div class="btn-group">
                                     <a href="" class="btn btn-sm btn-primary" data-toggle="modal"
                                        data-target="#modal-edit-permissions"
-                                       title="Edit permissions" @click="showEditPermissions(route)">
+                                       title="Edit permissions" @click="setCurrentRoute(route)">
                                         <i class="fa fa-lock"></i>
                                     </a>
                                     <button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip"
@@ -41,12 +41,12 @@
                         </tbody>
                     </table>
                 </tab-component>
-                <tab-component  name="Activated routes">
+                <tab-component name="Activated routes">
                     <h1>Hello 10</h1>
                 </tab-component>
             </tabs-component>
         </div>
-        <edit-permissions-component :current-route="currentRoute" v-if="showedEditPermissions"></edit-permissions-component>
+        <edit-permissions-component :current-route="currentRoute"></edit-permissions-component>
     </div>
 </template>
 
@@ -64,12 +64,12 @@
         data() {
             return {
                 routes: [],
-                currentRoute: {},
-                showedEditPermissions: false
+                currentRoute: {}
             }
         },
         created() {
             this.getRoutes();
+            this.getAcitvatedRoutes();
         },
         methods: {
             async getRoutes() {
@@ -78,9 +78,14 @@
                 this.isLoading = false;
                 this.routes = data;
             },
-            showEditPermissions(route){
+            async getAcitvatedRoutes() {
+                this.isLoading = true;
+                const {data} = await RouteRepository.getActivated();
+                this.isLoading = false;
+                this.activatedRoutes = data;
+            },
+            setCurrentRoute(route) {
                 this.currentRoute = route;
-                this.showedEditPermissions = true;
             }
         }
     }

@@ -25,7 +25,7 @@
                                                 <tbody>
                                                 <tr>
                                                     <template v-for="(permission_g, parent_key) in permissions">
-                                                        <drag tag="td" class="drag parent" :transferData="role">
+                                                        <drag tag="td" class="drag parent" :transferData="permission_g">
                                                             <label class="program-container"><span
                                                                     class="name">{{ parent_key }}</span>
                                                             </label>
@@ -49,8 +49,7 @@
                                 <div class="program-modal modal-expense">
                                     <div class="content">
                                         <div class="table-content">
-                                            <drop class="drop"
-                                                  style="border: 1px solid; min-height: 100px; height: 100%"
+                                            <drop class="drop drop-section"
                                                   :class="{ over }"
                                                   @dragover="over = true"
                                                   @dragleave="over = false"
@@ -58,16 +57,18 @@
                                                 <table>
                                                     <tbody>
                                                     <tr>
-
-                                                        <template v-for="(ability, parent_key) in routeAbilities">
+                                                        <template
+                                                                v-for="(ability, parent_key) in currentRoute.abilities">
                                                             <td class="parent">
-                                                                <label class="program-container"><span
-                                                                        class="name">{{ ability.name }}</span>
+                                                                <label class="program-container">
+                                                                    <span class="name">{{ ability.name }}</span>
+                                                                    <button class="btn btn-sm pull-right"
+                                                                            @click="detachAbility(ability, parent_key)">
+                                                                        <i class="fa fa-remove text-danger"></i>
+                                                                    </button>
                                                                 </label>
                                                             </td>
                                                         </template>
-
-
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -93,7 +94,7 @@
 <script>
     import {RepositoryFactory} from '../../../repositories/RepositoryFactory'
 
-    const RoleRepository = RepositoryFactory.get('role');
+    const RouteRepository = RepositoryFactory.get('route');
     const PermissionRepository = RepositoryFactory.get('permission');
     import {Drag, Drop} from 'vue-drag-drop';
 
@@ -103,15 +104,7 @@
         components: {Drag, Drop},
         data() {
             return {
-                roleTag: '',
-                roleTags: [],
-                roles: [],
-                routeRoles: [],
-                routeAbilities: [],
-                permission: {},
                 permissions: [],
-                autocompleteRoles: [],
-                showAddEditPermission: false,
                 error: '',
                 over: false,
             }
@@ -120,35 +113,46 @@
             currentRoute: {}
         },
         created() {
-            this.getAllRoles();
             this.getAllPermissions();
         },
-        computed: {
-            filteredItems() {
-                return this.autocompleteRoles.filter(i => {
-                    return i.text.toLowerCase().indexOf(this.roleTag.toLowerCase()) !== -1;
-                });
-            }
-        },
         methods: {
-            async getAllRoles() {
-                let res = await RoleRepository.get();
-                this.roles = res.data;
-            },
             async getAllPermissions() {
                 let res = await PermissionRepository.get(true);
                 this.permissions = res.data;
             },
             handleDrop(data) {
+                let vm = this;
                 this.over = false;
 
-
-                if ('abilities' in data) {
-                    this.routeAbilities = this.routeAbilities.concat(data.abilities);
+                if (Array.isArray(data)) {
+                    data.forEach(function (ability) {
+                        let key = vm.currentRoute.abilities.findIndex(function (item) {
+                            return item.name === ability.name;
+                        });
+                        if (key === -1) {
+                            vm.currentRoute.abilities = vm.currentRoute.abilities.concat(ability);
+                        }
+                    })
                 } else {
-                    this.routeAbilities.push(data);
+                    let key = vm.currentRoute.abilities.findIndex(function (item) {
+                        return item.name === data.name;
+                    });
+                    console.log(key);
+                    if (key === -1) {
+                        vm.currentRoute.abilities = vm.currentRoute.abilities.concat(data);
+                    }
                 }
 
+                RouteRepository.create(vm.currentRoute);
+            },
+            detachAbility(ability, key) {
+                let data = {
+                    route: this.currentRoute,
+                    ability: ability
+                };
+
+                RouteRepository.detachAbility(data);
+                this.currentRoute.abilities.splice(key, 1);
             },
             closeModal() {
                 this.$parent.showPermissions = !this.$parent.showPermissions;
@@ -178,7 +182,6 @@
                 border-collapse: collapse;
                 width: 100%;
                 height: 100%;
-                margin-top: 10px;
                 tbody {
                     width: 100%;
                     height: 100%;
@@ -297,5 +300,10 @@
                 }
             }
         }
+    }
+
+    .drop-section {
+        min-height: 100px;
+        height: 100%
     }
 </style>
