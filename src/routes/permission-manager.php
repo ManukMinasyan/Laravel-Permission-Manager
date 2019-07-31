@@ -33,6 +33,11 @@ Route::group([
     Route::resource('routes', 'RoutesController');
 
     Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
+        Route::get('/filtered-users', 'UsersController@getFilteredUsers');
+        Route::get('/auth-user', 'UsersController@getAuthUser');
+        Route::post('/assign-role/{user_id}', 'UsersController@assignRole');
+        Route::post('/attach-ability/{user_id}', 'UsersController@attachAbility');
+        Route::post('/detach-ability/{user_id}', 'UsersController@detachAbility');
         Route::get('/', 'UsersController@index');
     });
 });

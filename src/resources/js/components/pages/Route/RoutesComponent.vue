@@ -3,7 +3,23 @@
 
         <div class="block">
             <tabs-component>
-                <tab-component name="All routes" :selected="true">
+                <tab-component name="Routes" :selected="true">
+                    <div class="row border-bottom pb-1">
+                        <div class="col-md-12">
+                            <h6>Filter</h6>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" placeholder="Live search..." v-model="searchText">
+                        </div>
+                        <div class="col-md-4">
+                            <v-select :options="(['All']).concat(namespaces)" label="title"
+                                      v-model="selectedNamespaceFilter"></v-select>
+                        </div>
+                        <div class="col-md-4">
+                            <v-select :options="(['All']).concat(prefixes)"
+                                      v-model="selectedPrefixFilter"></v-select>
+                        </div>
+                    </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
                         <tr>
@@ -15,7 +31,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="(route, key) in routes">
+                        <tr v-for="(route, key) in filteredRoutes">
                             <th class="text-center" scope="row">{{ key+1 }}</th>
                             <td>{{ route.uri }}</td>
                             <td>{{ route.action['as'] }}</td>
@@ -41,9 +57,6 @@
                         </tbody>
                     </table>
                 </tab-component>
-                <tab-component name="Activated routes">
-                    <h1>Hello 10</h1>
-                </tab-component>
             </tabs-component>
         </div>
         <edit-permissions-component :current-route="currentRoute"></edit-permissions-component>
@@ -51,6 +64,8 @@
 </template>
 
 <script>
+    import 'vue-select/dist/vue-select.css';
+    import vSelect from 'vue-select';
     import {RepositoryFactory} from '../../../repositories/RepositoryFactory'
     import TabsComponent from "../../../helper-components/TabsComponent";
     import TabComponent from "../../../helper-components/TabComponent";
@@ -60,23 +75,49 @@
 
     export default {
         name: "RoutesComponent",
-        components: {EditPermissionsComponent, TabComponent, TabsComponent},
+        components: {EditPermissionsComponent,vSelect, TabComponent, TabsComponent},
         data() {
             return {
                 routes: [],
-                currentRoute: {}
+                namespaces: [],
+                prefixes: [],
+                searchText: '',
+                selectedNamespaceFilter: 'All',
+                selectedPrefixFilter: 'All',
+                currentRoute: {},
+                activatedRoutes: []
             }
         },
         created() {
             this.getRoutes();
             this.getAcitvatedRoutes();
         },
+        computed: {
+            filteredRoutes() {
+                let vm = this;
+                let namespace = vm.selectedNamespaceFilter;
+                let prefix = vm.selectedPrefixFilter;
+                let searchText = vm.searchText;
+
+                if (namespace === 'All' && prefix=== 'All' && searchText === '') {
+                    return vm.routes;
+                }
+
+                return vm.routes.filter(function (item) {
+                    return ((item.action.namespace === namespace) || namespace === 'All')
+                        && (prefix === 'All' || prefix === item.action.prefix)
+                        && (item.uri.indexOf(searchText) !== -1 || item.action['as'].indexOf(searchText) !== -1 || item.action['uses'].indexOf(searchText) !== -1);
+                });
+            }
+        },
         methods: {
             async getRoutes() {
                 this.isLoading = true;
                 const {data} = await RouteRepository.get();
                 this.isLoading = false;
-                this.routes = data;
+                this.routes = data.routes;
+                this.namespaces = data.namespaces;
+                this.prefixes = data.prefixes;
             },
             async getAcitvatedRoutes() {
                 this.isLoading = true;

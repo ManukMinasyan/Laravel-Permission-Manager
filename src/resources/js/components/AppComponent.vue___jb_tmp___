@@ -53,19 +53,23 @@
                         <!-- Visible only in normal mode -->
                         <div class="sidebar-mini-hidden-b text-center">
                             <a class="img-link" href="be_pages_generic_profile.html">
-                                <!--<img class="img-avatar" src="img/avatars/avatar15.jpg" alt="">-->
+                                <img class="img-avatar" src="img/avatars/avatar15.jpg" alt="">
                             </a>
                             <ul class="list-inline mt-10">
                                 <li class="list-inline-item">
-                                    <span class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase">
-                                        {{ authUser.name }}
-                                    </span>
+                                    <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase"
+                                       href="be_pages_generic_profile.html">J. Smith</a>
                                 </li>
                                 <li class="list-inline-item">
                                     <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->
                                     <a class="link-effect text-dual-primary-dark" data-toggle="layout"
                                        data-action="sidebar_style_inverse_toggle" href="javascript:void(0)">
                                         <i class="si si-drop"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="link-effect text-dual-primary-dark" href="op_auth_signin.html">
+                                        <i class="si si-logout"></i>
                                     </a>
                                 </li>
                             </ul>
@@ -77,23 +81,44 @@
                     <!-- Side Navigation -->
                     <div class="content-side content-side-full">
                         <ul class="nav-main">
+                            <!--<li>-->
+                            <!--<a class="active" href="{{ route('lpm.home') }}"><i class="si si-cup"></i><span-->
+                            <!--class="sidebar-mini-hide">Dashboard</span></a>-->
+                            <!--</li>-->
                             <li>
-                                <router-link :to="{name: 'main'}"><i class="si si-cup"></i><span
-                                        class="sidebar-mini-hide">Dashboard</span></router-link>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-settings"></i><span
+                                        class="sidebar-mini-hide">Configs</span></a>
+                                <ul>
+                                    <li v-for="route in routes">
+                                        <router-link :to="{name: route.hrefName}" class="sidebar-mini-hide">{{
+                                            route.name }}
+                                        </router-link>
+                                    </li>
+                                    <!--<li>-->
+                                    <!--<a href="{{ route('lpm.models.index') }}"><span-->
+                                    <!--class="sidebar-mini-hide">Models</span></a>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                    <!--<a href="{{ route('lpm.roles.index') }}"><span-->
+                                    <!--class="sidebar-mini-hide">Roles</span></a>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                    <!--<a href="{{ route('lpm.permissions.index') }}"><span class="sidebar-mini-hide">Permissions</span></a>-->
+                                    <!--</li>-->
+                                </ul>
                             </li>
-
-
-                            <li v-for="route in routes">
-                                <router-link :to="{name: route.hrefName}" class="sidebar-mini-hide">
-                                    <i :class="route.class"></i> {{ route.name }}
-                                </router-link>
+                            <li>
+                                <!--<a href="{{ route('lpm.routes.index') }}"><i class="si si-link"></i><span-->
+                                <!--class="sidebar-mini-hide">Routes</span></a>-->
                             </li>
-
+                            <li>
+                                <!--<a href="{{ route('lpm.users.index') }}"><i class="si si-users"></i><span-->
+                                <!--class="sidebar-mini-hide">Users</span></a>-->
+                            </li>
                             <li class="nav-main-heading"><span class="sidebar-mini-visible">UI</span><span
                                     class="sidebar-mini-hidden">Models</span></li>
                             <li>
-                                <router-link :to="{name: 'users'}"><i class="si si-users"></i><span
-                                        class="sidebar-mini-hide">Users</span></router-link>
+                                <router-link :to="{name: 'users'}"><i class="si si-users"></i><span class="sidebar-mini-hide">Users</span></router-link>
                             </li>
                         </ul>
                     </div>
@@ -118,6 +143,14 @@
                         <i class="fa fa-navicon"></i>
                     </button>
                     <!-- END Toggle Sidebar -->
+
+                    <!-- Open Search Section -->
+                    <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->
+                    <button type="button" class="btn btn-circle btn-dual-secondary" data-toggle="layout"
+                            data-action="header_search_on">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <!-- END Open Search Section -->
                 </div>
                 <!-- END Left Section -->
 
@@ -127,14 +160,69 @@
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-rounded btn-dual-secondary" id="page-header-user-dropdown"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ authUser.name }}
+                            J. Smith<i class="fa fa-angle-down ml-5"></i>
                         </button>
+                        <div class="dropdown-menu dropdown-menu-right min-width-150"
+                             aria-labelledby="page-header-user-dropdown">
+                            <a class="dropdown-item" href="be_pages_generic_profile.html">
+                                <i class="si si-user mr-5"></i> Profile
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center justify-content-between"
+                               href="be_pages_generic_inbox.html">
+                                <span><i class="si si-envelope-open mr-5"></i> Inbox</span>
+                                <span class="badge badge-primary">3</span>
+                            </a>
+                            <a class="dropdown-item" href="be_pages_generic_invoice.html">
+                                <i class="si si-note mr-5"></i> Invoices
+                            </a>
+                            <div class="dropdown-divider"></div>
+
+                            <!-- Toggle Side Overlay -->
+                            <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->
+                            <a class="dropdown-item" href="javascript:void(0)" data-toggle="layout"
+                               data-action="side_overlay_toggle">
+                                <i class="si si-wrench mr-5"></i> Settings
+                            </a>
+                            <!-- END Side Overlay -->
+
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="op_auth_signin.html">
+                                <i class="si si-logout mr-5"></i> Sign Out
+                            </a>
+                        </div>
                     </div>
                     <!-- END User Dropdown -->
                 </div>
                 <!-- END Right Section -->
             </div>
             <!-- END Header Content -->
+
+            <!-- Header Search -->
+            <div id="page-header-search" class="overlay-header">
+                <div class="content-header content-header-fullrow">
+                    <form action="be_pages_generic_search.html" method="post">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <!-- Close Search Section -->
+                                <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->
+                                <button type="button" class="btn btn-secondary" data-toggle="layout"
+                                        data-action="header_search_off">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                                <!-- END Close Search Section -->
+                            </div>
+                            <input type="text" class="form-control" placeholder="Search or hit ESC.."
+                                   id="page-header-search-input" name="page-header-search-input">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-secondary">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- END Header Search -->
 
             <!-- Header Loader -->
             <!-- Please check out the Activity page under Elements category to see examples of showing/hiding it -->
@@ -166,7 +254,7 @@
                                                                               target="_blank">Manuk Minasyan</a>
                 </div>
                 <div class="float-left">
-                    <a class="font-w600" href="https://github.com/ManukMinasyan/Laravel-Permission-Manager" target="_blank">Laravel Permission Manager 1.0</a>
+                    <a class="font-w600" href="https://goo.gl/po9Usv" target="_blank">Laravel Permission Manager 1.0</a>
                     &copy; <span class="js-year-copy">2019</span>
                 </div>
             </div>
@@ -176,8 +264,6 @@
 </template>
 
 <script>
-    import {RepositoryFactory} from './../repositories/RepositoryFactory'
-    const UserRepository = RepositoryFactory.get('user');
 
     export default {
         name: "AppComponent",
@@ -185,28 +271,24 @@
             return {
                 routes: [
                     {
+                        name: 'Models',
+                        hrefName: 'models'
+                    },
+                    {
                         name: 'Routes',
-                        hrefName: 'routes',
-                        class: 'si si-link'
+                        hrefName: 'routes'
                     },
                     {
                         name: 'Roles & Permissions',
-                        hrefName: 'rolesPermissions',
-                        class: 'si si-lock'
+                        hrefName: 'rolesPermissions'
                     }
-                ],
-                authUser: {}
+                ]
             }
         },
         created() {
-            this.getAuthUser();
         },
         methods: {
-            async getAuthUser() {
-                this.isLoading = true;
-                const {data} = await UserRepository.getAuthUser();
-                this.authUser = data;
-            },
+
         }
     }
 </script>

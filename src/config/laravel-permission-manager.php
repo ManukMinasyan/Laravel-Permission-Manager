@@ -8,6 +8,7 @@
 
 return [
     'database' => [
+        'option_table' => 'permission_manager_options',
         'model_table' => 'permission_manager_models',
 
         'group_table' => 'permission_manager_groups',

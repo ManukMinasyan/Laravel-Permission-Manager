@@ -25,12 +25,23 @@ class RoutesController extends Controller
     public function index()
     {
         $routes = RouteFacade::getRoutes()->getRoutesByName();
-        $routes = collect($this->getAssocRoutes($routes))->map(function ($route) {
+        $namespaces = collect();
+        $prefixes = collect();
+        $routes = collect($this->getAssocRoutes($routes))->map(function ($route)use($namespaces, $prefixes) {
+            $namespaces->push($route->action['namespace']);
+            $prefixes->push($route->action['prefix']);
+
             $route->abilities = optional(Route::where('action_method', $route->action['uses'])->first())->abilities ?? [];
             return $route;
         });
 
-        return response()->json($routes->toArray());
+        return response()->json([
+            'routes' => $routes->toArray(),
+            'namespaces' => $namespaces->unique()->values(),
+            'prefixes' => $prefixes->filter(function($key){
+                return $key !== null;
+            })->unique()->values()
+        ]);
     }
 
     /**

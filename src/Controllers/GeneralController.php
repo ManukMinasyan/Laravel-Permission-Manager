@@ -21,9 +21,6 @@ class GeneralController extends Controller
      */
     public function index()
     {
-
-//        $roles = Role::with('abilities')->get();
-//        dd($roles);
         return view('laravel-permission-manager::index');
     }
 }

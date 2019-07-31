@@ -31,6 +31,11 @@ let routes = [
         component: loadView('pages/Route/RoutesComponent')
     },
     {
+        path: '/users',
+        name: 'users',
+        component: loadView('pages/User/UsersComponent')
+    },
+    {
         path: '/roles-and-permissions',
         name: 'rolesPermissions',
         component: loadView('pages/Role/RolesPermissionsComponent')

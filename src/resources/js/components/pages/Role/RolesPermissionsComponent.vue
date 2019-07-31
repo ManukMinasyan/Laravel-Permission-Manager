@@ -8,10 +8,12 @@
                             <h6>Filter</h6>
                         </div>
                         <div class="col-md-3">
-                            <v-select :options="roles" label="title" @input="filterByRole"></v-select>
+                            <v-select :options="([{title: 'All', name: 'all'}]).concat(roles)" label="title"
+                                      v-model="selectedRoleFilter"></v-select>
                         </div>
                         <div class="col-md-3">
-                            <v-select :options="groups" label="name" @input="filterByGroup"></v-select>
+                            <v-select :options="([{name: 'All'}]).concat(groups)" label="name"
+                                      v-model="selectedGroupFilter"></v-select>
                         </div>
                         <div class="col-md-1 offset-md-5">
                             <button class="btn btn-sm btn-primary" title="Add new permission"
@@ -241,7 +243,13 @@
                 permissions: [],
                 roles: [],
                 groups: [],
-                filteredPermissions: [],
+                selectedRoleFilter: {
+                    title: 'All',
+                    name: 'all'
+                },
+                selectedGroupFilter: {
+                    name: 'All'
+                },
                 newPermission: {},
                 error: '',
             }
@@ -251,9 +259,22 @@
             this.getRoles();
             this.getGroups();
         },
-        watch: {
-            permissions: function () {
-                this.filteredPermissions = this.permissions;
+        computed: {
+            filteredPermissions() {
+                let vm = this;
+                let role = vm.selectedRoleFilter;
+                let group = vm.selectedGroupFilter;
+
+                if (role.name === 'all' && group.name === 'All') {
+                    return vm.permissions;
+                }
+
+                return vm.permissions.filter(function (item) {
+                    return ((item.group !== null && item.group.name === group.name) || group.name === 'All')
+                        && (role.name === 'all' || item.roles.some(function (r) {
+                            return r.name === role.name;
+                        }));
+                });
             }
         },
         methods: {
