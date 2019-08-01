@@ -8,6 +8,7 @@ LaravelPermissionManager - It is a modern and dynamic permission management syst
 ## Introduction
 If you need to speed up project development, and you need to use permissions and roles in your project,
 This package is perfect for you.
+<img src="https://raw.githubusercontent.com/ManukMinasyan/Laravel-Permission-Manager/master/assets/branding/ui-control-panel.png">
 
 ## Installation
 Install PermissionManager with [composer](https://getcomposer.org/doc/00-intro.md):
