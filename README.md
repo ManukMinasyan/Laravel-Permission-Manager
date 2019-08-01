@@ -1,7 +1,11 @@
+<p align="center">
+<img src="https://raw.githubusercontent.com/ManukMinasyan/Laravel-Permission-Manager/master/assets/branding/logo.png" width="356">
+</p>
+
 # LaravelPermissionManager
 LaravelPermissionManager - It is a modern and dynamic permission management system based on Bouncer.
 
-##Introduction
+## Introduction
 If you need to speed up project development, and you need to use permissions and roles in your project,
 This package is perfect for you.
 
@@ -44,5 +48,5 @@ php artisan migrate
 Congratulations, you have successfully set up the project.
 You can access the permission manager control panel using the URI "/permission-manager".
 
-##Important information
+## Important information
 The development of the package is not complete fully. you can install and evaluate my work. Thanks
