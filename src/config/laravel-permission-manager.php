@@ -16,7 +16,7 @@ return [
         'route_permission_table' => 'permission_manager_route_permission'
     ],
 
-    'user_model' => \App\Models\User::class,
+    'user_model' => \App\User::class,
 
     'middleware' => [
           'web', 'auth',

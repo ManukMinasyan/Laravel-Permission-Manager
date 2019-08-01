@@ -24,21 +24,23 @@ class GeneralMiddleware
     public function handle($request, Closure $next, $guard = null)
     {
         $actionMethod = $request->route()->getAction()['uses'];
-        $route = Route::where('action_method', $actionMethod)->first();
 
-        if ($route) {
-            $user = Auth::user();
+        if(is_string($actionMethod)) {
+            $route = Route::where('action_method', $actionMethod)->first();
 
-            $access = $route->whereHas('abilities', function ($q) use ($user) {
-                $q->whereIn('ability_id', $user->abilities->pluck('id'));
-            })->exists();
+            if ($route) {
+                $user = Auth::user();
+
+                $access = $route->whereHas('abilities', function ($q) use ($user) {
+                    $q->whereIn('ability_id', $user->abilities->pluck('id'));
+                })->exists();
+            }
+
+
+            if (isset($route) && $route->abilities()->exists() && isset($access) && !$access) {
+                return abort(403);
+            }
         }
-
-
-        if (isset($route) && $route->abilities()->exists() && isset($access) && !$access) {
-            return abort(403);
-        }
-
 
         return $next($request);
     }
