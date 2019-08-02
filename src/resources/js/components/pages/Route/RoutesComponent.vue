@@ -43,14 +43,6 @@
                                        title="Edit permissions" @click="setCurrentRoute(route)">
                                         <i class="fa fa-lock"></i>
                                     </a>
-                                    <button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip"
-                                            title="Edit">
-                                        <i class="fa fa-pencil"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip"
-                                            title="Delete">
-                                        <i class="fa fa-times"></i>
-                                    </button>
                                 </div>
                             </td>
                         </tr>

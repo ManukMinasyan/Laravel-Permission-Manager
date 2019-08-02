@@ -29,14 +29,22 @@
                                                 <tr>
                                                     <template v-for="(permission_g, parent_key) in permissions">
                                                         <drag tag="td" class="drag parent" :transferData="permission_g">
-                                                            <label class="program-container"><span
-                                                                    class="name">{{ parent_key }}</span>
+                                                            <label class="program-container">
+                                                                <span class="name">{{ parent_key }}</span>
+                                                                <button class="btn btn-sm pull-right"
+                                                                        @click="attachAbility(permission_g)">
+                                                                    <i class="fa fa-arrow-right text-primary"></i>
+                                                                </button>
                                                             </label>
                                                         </drag>
                                                         <template v-for="ability in permission_g">
                                                             <drag tag="td" class="drag" :transferData="ability">
-                                                                <label class="program-container ability"><span
-                                                                        class="name">{{ ability.title }}</span>
+                                                                <label class="program-container ability">
+                                                                    <span class="name">{{ ability.title }}</span>
+                                                                    <button class="btn btn-sm pull-right"
+                                                                            @click="attachAbility(ability)">
+                                                                        <i class="fa fa-arrow-right text-primary"></i>
+                                                                    </button>
                                                                 </label>
                                                             </drag>
                                                         </template>

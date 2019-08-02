@@ -364,6 +364,11 @@ var render = function() {
                             ),
                             label: "title"
                           },
+                          on: {
+                            input: function($event) {
+                              return _vm.getFilteredUsers()
+                            }
+                          },
                           model: {
                             value: _vm.selectedPermissionFilter,
                             callback: function($$v) {

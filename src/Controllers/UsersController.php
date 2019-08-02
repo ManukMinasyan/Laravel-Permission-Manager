@@ -40,6 +40,10 @@ class UsersController extends Controller
         return response()->json(Auth::user());
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getFilteredUsers(Request $request)
     {
         $filters = $request->only('searchText', 'selectedRoleFilter', 'selectedPermissionFilter');
@@ -64,6 +68,12 @@ class UsersController extends Controller
         if(isset($filters['selectedRoleFilter'])){
             $users->whereHas('roles', function($q)use($filters){
                 $q->where('id', $filters['selectedRoleFilter']);
+            });
+        }
+
+        if(isset($filters['selectedPermissionFilter'])){
+            $users->whereHas('abilities', function($q)use($filters){
+                $q->where('id', $filters['selectedPermissionFilter']);
             });
         }
 

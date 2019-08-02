@@ -19,8 +19,8 @@ return [
     'user_model' => \App\User::class,
 
     'middleware' => [
-          'web', 'auth',
+          'web', 'auth'
     ],
 
-    'route' => 'permission-manager',
+    'route' => 'permission-manager'
 ];

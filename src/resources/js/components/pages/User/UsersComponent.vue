@@ -17,7 +17,7 @@
                         </div>
                         <div class="col-md-3">
                             <v-select :options="([{title: 'All', name: 'all'}]).concat(permissions)" label="title"
-                                      v-model="selectedPermissionFilter"></v-select>
+                                      v-model="selectedPermissionFilter" @input="getFilteredUsers()"></v-select>
                         </div>
                     </div>
                     <table class="table table-striped table-vcenter">
