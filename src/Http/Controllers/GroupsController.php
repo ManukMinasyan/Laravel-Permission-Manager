@@ -6,13 +6,13 @@
  * Time: 22:25.
  */
 
-namespace ManukMinasyan\LaravelPermissionManager;
+namespace ManukMinasyan\LaravelPermissionManager\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use ManukMinasyan\LaravelPermissionManager\Http\Resources\Group\GroupCollection;
+use ManukMinasyan\LaravelPermissionManager\Http\Resources\Group\GroupResource;
 use ManukMinasyan\LaravelPermissionManager\Models\Group;
-use ManukMinasyan\LaravelPermissionManager\Models\Role;
 use ManukMinasyan\LaravelPermissionManager\Requests\GroupRequest;
-use ManukMinasyan\LaravelPermissionManager\Requests\RoleRequest;
 use ManukMinasyan\LaravelPermissionManager\Traits\PermissionManagerTrait;
 
 class GroupsController extends Controller
@@ -20,18 +20,18 @@ class GroupsController extends Controller
     use PermissionManagerTrait;
 
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @return GroupCollection
      */
     public function index()
     {
         $groups = Group::all();
 
-        return response()->json($groups);
+        return new GroupCollection($groups);
     }
 
     /**
      * @param GroupRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return GroupResource
      */
     public function store(GroupRequest $request)
     {
@@ -42,7 +42,7 @@ class GroupsController extends Controller
         $group->comment = $data['comment'];
         $group->save();
 
-        return response()->json(['status' => 'success', 'data' => $group]);
+        return new GroupResource($group);
     }
 
     /**

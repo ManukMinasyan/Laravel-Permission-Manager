@@ -105,15 +105,15 @@
 
                 this.isLoading = true;
                 const {data} = await UserRepository.getFilteredUsers(filters);
-                this.users = data;
+                this.users = data.data;
             },
             async getRoles() {
                 let res = await RoleRepository.get(true);
                 this.roles = res.data;
             },
             async getPermissions() {
-                let res = await PermissionRepository.get();
-                this.permissions = res.data;
+                const {data} = await PermissionRepository.get();
+                this.permissions = data.data;
             },
             setCurrentUser(user) {
                 this.currentUser = user;

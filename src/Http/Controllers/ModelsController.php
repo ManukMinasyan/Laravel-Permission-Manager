@@ -6,11 +6,9 @@
  * Time: 22:25.
  */
 
-namespace ManukMinasyan\LaravelPermissionManager;
+namespace ManukMinasyan\LaravelPermissionManager\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Http\Request;
 use ManukMinasyan\LaravelPermissionManager\Traits\PermissionManagerTrait;
 
 class ModelsController extends Controller

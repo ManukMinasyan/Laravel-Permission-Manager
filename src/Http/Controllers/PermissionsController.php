@@ -6,11 +6,11 @@
  * Time: 22:25
  */
 
-namespace ManukMinasyan\LaravelPermissionManager;
+namespace ManukMinasyan\LaravelPermissionManager\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use ManukMinasyan\LaravelPermissionManager\Http\Resources\Ability\AbilityCollection;
 use ManukMinasyan\LaravelPermissionManager\Models\Ability;
 use ManukMinasyan\LaravelPermissionManager\Models\Group;
 use ManukMinasyan\LaravelPermissionManager\Models\Role;
@@ -23,7 +23,8 @@ class PermissionsController extends Controller
     use PermissionManagerTrait;
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Request $request
+     * @return AbilityCollection
      */
     public function index(Request $request)
     {
@@ -31,10 +32,10 @@ class PermissionsController extends Controller
         $abilities = Ability::with('roles', 'group')->get();
 
         if ($request->has('group_by_group')) {
-            $abilities = $abilities->groupBy('group.name')->sort()->reverse();
+            $abilities = $abilities->groupBy('group.name')->sort();
         }
 
-        return response()->json($abilities);
+        return new AbilityCollection($abilities);
     }
 
     /**

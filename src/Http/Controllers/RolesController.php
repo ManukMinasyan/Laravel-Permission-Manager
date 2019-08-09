@@ -6,9 +6,10 @@
  * Time: 22:25.
  */
 
-namespace ManukMinasyan\LaravelPermissionManager;
+namespace ManukMinasyan\LaravelPermissionManager\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use ManukMinasyan\LaravelPermissionManager\Http\Resources\Role\RoleResource;
 use ManukMinasyan\LaravelPermissionManager\Models\Role;
 use ManukMinasyan\LaravelPermissionManager\Requests\RoleRequest;
 use ManukMinasyan\LaravelPermissionManager\Traits\PermissionManagerTrait;
@@ -18,27 +19,18 @@ class RolesController extends Controller
     use PermissionManagerTrait;
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return RoleResource
      */
     public function index()
     {
         $roles = Role::with('abilities')->get();
 
-        return response()->json($roles);
-    }
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('laravel-permission-manager::roles.create', compact('roles'));
+        return new RoleResource($roles);
     }
 
     /**
      * @param RoleRequest $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RoleResource
      */
     public function store(RoleRequest $request)
     {
@@ -46,19 +38,7 @@ class RolesController extends Controller
 
         $role = Role::firstOrCreate($data);
 
-        return response()->json(['status' => 'success', 'data' => $role]);
-    }
-
-    /**
-     * @param $role_id
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function edit($role_id)
-    {
-        $role = Role::find($role_id);
-
-        return view('laravel-permission-manager::roles.edit', compact('role'));
+        return new RoleResource($role);
     }
 
     /**

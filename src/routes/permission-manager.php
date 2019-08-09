@@ -9,7 +9,7 @@
 Route::group([
     'middleware' => config('laravel-permission-manager.middleware'),
     'prefix' => config('laravel-permission-manager.route'),
-    'namespace' => 'ManukMinasyan\LaravelPermissionManager',
+    'namespace' => 'ManukMinasyan\LaravelPermissionManager\Http\Controllers',
     'as' => 'lpm.'
 ], function () {
     Route::get('/', 'GeneralController@index')->name('home');
@@ -18,19 +18,21 @@ Route::group([
 Route::group([
     'middleware' => config('laravel-permission-manager.middleware'),
     'prefix' => 'laravel-permission-manager-route-api',
-    'namespace' => 'ManukMinasyan\LaravelPermissionManager',
+    'namespace' => 'ManukMinasyan\LaravelPermissionManager\Http\Controllers',
 ], function () {
     Route::group(['prefix' => 'models', 'as' => 'models.'], function () {
         Route::get('/', 'ModelsController@get');
     });
 
-    Route::resource('roles', 'RolesController');
-    Route::resource('groups', 'GroupsController');
-    Route::resource('permissions', 'PermissionsController');
-
     Route::get('/routes/activated', 'RoutesController@getActivated');
     Route::post('/routes/detach-ability', 'RoutesController@detachAbility');
-    Route::resource('routes', 'RoutesController');
+
+    Route::apiResources([
+        'roles' => 'RolesController',
+        'groups' => 'GroupsController',
+        'permissions' => 'PermissionsController',
+        'routes' => 'RoutesController'
+    ]);
 
     Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
         Route::get('/filtered-users', 'UsersController@getFilteredUsers');

@@ -6,12 +6,14 @@
  * Time: 22:25.
  */
 
-namespace ManukMinasyan\LaravelPermissionManager;
+namespace ManukMinasyan\LaravelPermissionManager\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
+use ManukMinasyan\LaravelPermissionManager\Http\Resources\User\UserCollection;
+use ManukMinasyan\LaravelPermissionManager\Http\Resources\User\UserResource;
 use ManukMinasyan\LaravelPermissionManager\Models\Role;
 use ManukMinasyan\LaravelPermissionManager\Traits\PermissionManagerTrait;
 
@@ -30,20 +32,20 @@ class UsersController extends Controller
         $table = with(new $userModel)->getTable();
         $schema = Schema::getColumnListing($table);
 
-        return response()->json(['schema' => $schema, 'users' => $users]);
+        return response()->json(['schema' => $schema, 'users' => new UserCollection($users)]);
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @return UserResource
      */
     public function getAuthUser()
     {
-        return response()->json(Auth::user());
+        return new UserResource(Auth::user());
     }
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return UserCollection
      */
     public function getFilteredUsers(Request $request)
     {
@@ -53,32 +55,32 @@ class UsersController extends Controller
         $users = config('laravel-permission-manager.user_model')::with('roles', 'abilities');
 
         $table = with(new $userModel)->getTable();
-        $schema = collect(Schema::getColumnListing($table))->filter(function($item){
+        $schema = collect(Schema::getColumnListing($table))->filter(function ($item) {
             return $item !== 'password';
         });
 
         if (isset($filters['searchText'])) {
             $users->where(function ($q) use ($schema, $filters) {
-                $q->where($schema[0],  'LIKE', '%' . $filters['searchText'] . '%');
+                $q->where($schema[0], 'LIKE', '%' . $filters['searchText'] . '%');
                 foreach ($schema as $schemaItem) {
-                    $q->orWhere($schemaItem,  'LIKE', '%' .  $filters['searchText'] . '%');
+                    $q->orWhere($schemaItem, 'LIKE', '%' . $filters['searchText'] . '%');
                 }
             });
         }
 
-        if(isset($filters['selectedRoleFilter'])){
-            $users->whereHas('roles', function($q)use($filters){
+        if (isset($filters['selectedRoleFilter'])) {
+            $users->whereHas('roles', function ($q) use ($filters) {
                 $q->where('id', $filters['selectedRoleFilter']);
             });
         }
 
-        if(isset($filters['selectedPermissionFilter'])){
-            $users->whereHas('abilities', function($q)use($filters){
+        if (isset($filters['selectedPermissionFilter'])) {
+            $users->whereHas('abilities', function ($q) use ($filters) {
                 $q->where('id', $filters['selectedPermissionFilter']);
             });
         }
 
-        return response()->json($users->get());
+        return  new UserCollection($users->get());
     }
 
     /**
@@ -92,7 +94,7 @@ class UsersController extends Controller
         $user = config('laravel-permission-manager.user_model')::findOrFail($user_id);
 
         $user->roles()->detach();
-        collect($data)->pluck('id')->each(function($id)use($user){
+        collect($data)->pluck('id')->each(function ($id) use ($user) {
             $user->assign(Role::find($id));
         });
 

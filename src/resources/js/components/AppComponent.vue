@@ -205,7 +205,7 @@
             async getAuthUser() {
                 this.isLoading = true;
                 const {data} = await UserRepository.getAuthUser();
-                this.authUser = data;
+                this.authUser = data.data;
             },
         }
     }

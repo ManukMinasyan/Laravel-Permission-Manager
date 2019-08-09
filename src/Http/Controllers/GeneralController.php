@@ -6,10 +6,9 @@
  * Time: 22:25.
  */
 
-namespace ManukMinasyan\LaravelPermissionManager;
+namespace ManukMinasyan\LaravelPermissionManager\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use ManukMinasyan\LaravelPermissionManager\Models\Role;
 use ManukMinasyan\LaravelPermissionManager\Traits\PermissionManagerTrait;
 
 class GeneralController extends Controller

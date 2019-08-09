@@ -282,19 +282,19 @@
                 this.isLoading = true;
                 const {data} = await RoleRepository.get();
                 this.isLoading = false;
-                this.roles = data;
+                this.roles = data.data;
             },
             async getGroups() {
                 this.isLoading = true;
                 const {data} = await GroupRepository.get();
                 this.isLoading = false;
-                this.groups = data;
+                this.groups = data.data;
             },
             async getPermissions() {
                 this.isLoading = true;
                 const {data} = await PermissionRepository.get();
                 this.isLoading = false;
-                this.permissions = data;
+                this.permissions = data.data;
             },
             updatePermission(permission) {
                 this.$set(permission, 'edittable', false);

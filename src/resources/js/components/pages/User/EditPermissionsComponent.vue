@@ -72,7 +72,7 @@
                                                                 v-for="(ability, parent_key) in currentUser.abilities">
                                                             <td class="parent">
                                                                 <label class="program-container">
-                                                                    <span class="name">{{ ability.name }}</span>
+                                                                    <span class="name">{{ ability.title }}</span>
                                                                     <button class="btn btn-sm pull-right"
                                                                             @click="detachAbility(ability, parent_key)">
                                                                         <i class="fa fa-remove text-danger"></i>
@@ -134,16 +134,17 @@
         },
         methods: {
             async getRoles() {
-                let res = await RoleRepository.get(true);
-                this.roles = res.data;
+                const {data} = await RoleRepository.get(true);
+                this.roles = data.data;
             },
             async getAllPermissions() {
-                let res = await PermissionRepository.get(true);
-                this.permissions = res.data;
+                const {data} = await PermissionRepository.get(true);
+                this.permissions = data.data;
             },
             attachAbility(data) {
                 let vm = this;
                 this.over = false;
+                let attach = false;
 
                 if (Array.isArray(data)) {
                     data.forEach(function (ability) {
@@ -152,19 +153,23 @@
                         });
                         if (key === -1) {
                             vm.currentUser.abilities = vm.currentUser.abilities.concat(ability);
+                            attach = true;
                         }
                     })
                 } else {
                     let key = vm.currentUser.abilities.findIndex(function (item) {
                         return item.name === data.name;
                     });
-                    console.log(key);
+
                     if (key === -1) {
                         vm.currentUser.abilities = vm.currentUser.abilities.concat(data);
+                        attach = true;
                     }
                 }
 
-                UserRepository.attachAbility(vm.currentUser.id, vm.currentUser.abilities);
+                if(attach) {
+                    UserRepository.attachAbility(vm.currentUser.id, vm.currentUser.abilities);
+                }
             },
             changeRole(roles) {
                 let vm = this;

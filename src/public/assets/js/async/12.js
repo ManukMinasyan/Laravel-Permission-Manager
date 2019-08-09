@@ -177,7 +177,7 @@ var PermissionRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MOD
               case 4:
                 _ref2 = _context2.sent;
                 data = _ref2.data;
-                this.users = data;
+                this.users = data.data;
 
               case 7:
               case "end":
@@ -227,7 +227,8 @@ var PermissionRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MOD
       var _getPermissions = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var res;
+        var _ref3, data;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -236,10 +237,11 @@ var PermissionRepository = _repositories_RepositoryFactory__WEBPACK_IMPORTED_MOD
                 return PermissionRepository.get();
 
               case 2:
-                res = _context4.sent;
-                this.permissions = res.data;
+                _ref3 = _context4.sent;
+                data = _ref3.data;
+                this.permissions = data.data;
 
-              case 4:
+              case 5:
               case "end":
                 return _context4.stop();
             }

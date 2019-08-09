@@ -6,10 +6,9 @@
  * Time: 22:25
  */
 
-namespace ManukMinasyan\LaravelPermissionManager;
+namespace ManukMinasyan\LaravelPermissionManager\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Route;
 use ManukMinasyan\LaravelPermissionManager\Traits\PermissionManagerTrait;
 
 class ConfigController extends Controller

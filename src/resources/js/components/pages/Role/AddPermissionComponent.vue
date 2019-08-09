@@ -95,12 +95,12 @@
         },
         methods: {
             async getRoles() {
-                let res = await RoleRepository.get();
-                this.roles = res.data;
+                const {data} = await RoleRepository.get();
+                this.roles = data.data;
             },
             async getGroups() {
-                let res = await GroupRepository.get();
-                this.groups = res.data;
+                const {data} = await GroupRepository.get();
+                this.groups = data.data;
             },
             storePermission(e) {
                 e.preventDefault();
