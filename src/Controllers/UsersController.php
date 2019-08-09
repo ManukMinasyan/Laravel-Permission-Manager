@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
+use ManukMinasyan\LaravelPermissionManager\Models\Role;
 use ManukMinasyan\LaravelPermissionManager\Traits\PermissionManagerTrait;
 
 class UsersController extends Controller
@@ -91,9 +92,9 @@ class UsersController extends Controller
         $user = config('laravel-permission-manager.user_model')::findOrFail($user_id);
 
         $user->roles()->detach();
-        $user->roles()->attach(collect($data)->pluck('id'));
-
-//        $user->abilities()->sync(collect($data['abilities'])->pluck('id'));
+        collect($data)->pluck('id')->each(function($id)use($user){
+            $user->assign(Role::find($id));
+        });
 
         return response()->json(['success' => true]);
     }

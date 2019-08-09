@@ -17,7 +17,7 @@
                         </div>
                         <div class="col-md-1 offset-md-5">
                             <button class="btn btn-sm btn-primary" title="Add new permission"
-                                    data-toggle="modal" data-target="#modal-edit-permissions">
+                                    data-toggle="modal" data-target="#modal-add-permission">
                                 <i class='si si-plus'></i>
                             </button>
                         </div>

@@ -23,6 +23,6 @@ class Ability extends BouncerAbility
 
     public function group()
     {
-        return $this->belongsTo(Group::class);
+        return $this->belongsTo(Group::class)->withDefault();
     }
 }

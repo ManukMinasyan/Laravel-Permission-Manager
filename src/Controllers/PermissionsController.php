@@ -30,7 +30,7 @@ class PermissionsController extends Controller
 
         $abilities = Ability::with('roles', 'group')->get();
 
-        if($request->has('group_by_group')){
+        if ($request->has('group_by_group')) {
             $abilities = $abilities->groupBy('group.name')->sort()->reverse();
         }
 
@@ -64,7 +64,7 @@ class PermissionsController extends Controller
         }
         $ability->save();
 
-        return response()->json(['success' => true]);
+        return response()->json(['status' => 'success', 'data' => $ability->load('roles', 'group')]);
     }
 
     /**
@@ -84,6 +84,7 @@ class PermissionsController extends Controller
             collect($request['roles'])->each(function ($role) use ($ability) {
                 $role = Role::findOrFail($role['id']);
                 $role->abilities()->syncWithoutDetaching([$ability->id]);
+                Bouncer::allow($role)->to($ability);
             });
         }
 

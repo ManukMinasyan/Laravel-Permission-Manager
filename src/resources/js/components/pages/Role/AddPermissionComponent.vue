@@ -1,5 +1,5 @@
 <template>
-    <div class="modal fade" id="modal-edit-permissions" tabindex="-1" role="dialog" aria-labelledby="modal-popout"
+    <div class="modal fade" id="modal-add-permission" tabindex="-1" role="dialog" aria-labelledby="modal-popout"
          aria-hidden="true">
         <div class="modal-dialog modal-dialog-popout modal-md" role="document">
             <div class="modal-content">
@@ -21,18 +21,18 @@
                                 <div class="form-group row">
                                     <div class="col-md-6">
                                         <div class="form-material">
-                                            <input type="text" class="form-control" id="material-name"
-                                                   v-model="permission.name"
-                                                   placeholder="Please enter name">
-                                            <label for="material-name">Name</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-material">
                                             <input type="text" class="form-control" id="material-title"
                                                    v-model="permission.title"
                                                    placeholder="Please enter title">
                                             <label for="material-title">Title</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-material">
+                                            <input type="text" class="form-control" id="material-name"
+                                                   v-model="permission.name"
+                                                   placeholder="Please enter name">
+                                            <label for="material-name">Name</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -108,7 +108,10 @@
                 vm.error = '';
 
                 PermissionRepository.create(this.permission).then(res => {
+                    vm.$parent.permissions.push(res.data.data);
                     vm.permission = {};
+                    $('#modal-add-permission').modal('hide');
+                    $('.modal-backdrop').remove();
                 }).catch(error => {
                     let errors = error.response.data.errors;
                     vm.error = errors[Object.keys(errors)[0]][0];

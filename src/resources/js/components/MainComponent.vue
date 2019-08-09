@@ -80,10 +80,7 @@
 
 <script>
     export default {
-        name: "MainComponent",
-        mounted() {
-            console.log('Component mounted.')
-        }
+        name: "MainComponent"
     }
 </script>
 
