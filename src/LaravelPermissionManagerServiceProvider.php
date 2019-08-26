@@ -29,11 +29,11 @@ class LaravelPermissionManagerServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/views' => base_path('resources/views/permission-manager/views'),
+            __DIR__.'/resources/views' => base_path('resources/views/permission-manager/views'),
         ]);
 
         $this->publishes([
-            __DIR__.'/assets' => public_path('vendor/ManukMinasyan/LaravelPermissionManager'),
+            __DIR__.'/public/assets' => public_path('vendor/ManukMinasyan/LaravelPermissionManager'),
         ], 'assets');
 
         $this->registerHelpers();
