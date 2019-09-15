@@ -25,14 +25,13 @@ class GeneralMiddleware
     {
         $actionMethod = $request->route()->getAction()['uses'];
 
-        if(is_string($actionMethod)) {
+        if (is_string($actionMethod)) {
             $route = Route::where('action_method', $actionMethod)->first();
 
             if ($route) {
                 $user = Auth::user();
-
                 $access = $route->whereHas('abilities', function ($q) use ($user) {
-                    $q->whereIn('ability_id', $user->abilities->pluck('id'));
+                    $q->whereIn('ability_id', $user->getAbilities()->pluck('id'));
                 })->exists();
             }
 
