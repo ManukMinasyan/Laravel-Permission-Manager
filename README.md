@@ -3,6 +3,9 @@
 </p>
 
 # LaravelPermissionManager
+<a href="https://packagist.org/packages/manukminasyan/laravel-permission-manager"><img src="https://poser.pugx.org/manukminasyan/laravel-permission-manager/d/total.svg" alt="Total Downloads"></a>
+<a href="https://github.com/ManukMinasyan/Laravel-Permission-Manager/blob/master/LICENSE"><img src="https://poser.pugx.org/manukminasyan/laravel-permission-manager/license.svg" alt="License"></a>
+
 LaravelPermissionManager - It is a modern and dynamic permission management system based on Bouncer.
 
 ## Introduction
