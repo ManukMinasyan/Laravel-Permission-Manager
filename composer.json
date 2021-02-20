@@ -23,8 +23,8 @@
         }
     },
     "require": {
-        "silber/bouncer": "v1.0.0-rc.5",
-        "illuminate/support": "5.5 - 5.8"
+        "silber/bouncer": ">=v1.0.0-rc.5",
+        "illuminate/support": ">=5.5"
     },
     "extra": {
         "laravel": {
