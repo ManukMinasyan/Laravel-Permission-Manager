@@ -35,6 +35,6 @@ class CreateLaravelRouteManagerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('laravel-permission-manager.database.model_table'));
+        Schema::dropIfExists(config('laravel-permission-manager.database.route_table'));
     }
 }
