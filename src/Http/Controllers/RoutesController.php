@@ -30,8 +30,13 @@ class RoutesController extends Controller
         $routes = collect($this->getAssocRoutes($routes))->map(function ($route)use($namespaces, $prefixes) {
             $namespaces->push($route->action['namespace']);
             $prefixes->push($route->action['prefix']);
-
-            $route->abilities = optional(Route::where('action_method', $route->action['uses'])->first())->abilities ?? [];
+            $abilities = [];
+            try {
+                $abilities = optional(Route::where('action_method', $route->action['uses'])->first())->abilities;
+            } catch (\Throwable $th) {
+                $abilities = [];
+            }
+            $route->abilities = $abilities;
             return $route;
         });
 
