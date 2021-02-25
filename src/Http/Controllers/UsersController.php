@@ -28,10 +28,10 @@ class UsersController extends Controller
     {
         $userModel = config('laravel-permission-manager.user_model');
         $users = config('laravel-permission-manager.user_model')::with('roles', 'abilities')->get();
-
         $table = with(new $userModel)->getTable();
+        $hiddenColumns = ['password', 'remember_token'];
         $schema = Schema::getColumnListing($table);
-
+        $schema = array_diff($schema, $hiddenColumns);
         return response()->json(['schema' => $schema, 'users' => new UserCollection($users)]);
     }
 
@@ -50,13 +50,13 @@ class UsersController extends Controller
     public function getFilteredUsers(Request $request)
     {
         $filters = $request->only('searchText', 'selectedRoleFilter', 'selectedPermissionFilter');
-
+    
         $userModel = config('laravel-permission-manager.user_model');
         $users = config('laravel-permission-manager.user_model')::with('roles', 'abilities');
 
         $table = with(new $userModel)->getTable();
         $schema = collect(Schema::getColumnListing($table))->filter(function ($item) {
-            return $item !== 'password';
+            return !in_array($item, ['password', 'remember_token']);
         });
 
         if (isset($filters['searchText'])) {
